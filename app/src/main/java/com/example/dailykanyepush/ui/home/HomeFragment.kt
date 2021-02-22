@@ -1,5 +1,6 @@
 package com.example.dailykanyepush.ui.home
 
+import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
@@ -8,13 +9,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.trackmysleepquality.database.SleepDatabase
+import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.dailykanyepush.R
+import com.example.dailykanyepush.databinding.FragmentHomeBinding
 import com.google.firebase.messaging.FirebaseMessaging
+
+
+//sys time, how to pass,
 
 //first page with info
 // report bug, buy bear, contact
@@ -26,31 +32,97 @@ class HomeFragment : Fragment() {
     private val TOPIC = "Daily-Kanye"
 
     private lateinit var homeViewModel: HomeViewModel
+   // val br: BroadcastReceiver = MyBroadcastReceiver()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        //change to setonclicklistner
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+/*        homeViewModel =
+                ViewModelProvider(this).get(HomeViewModel::class.java)*/
+        //cval root = inflater.inflate(R.layout.fragment_home, container, false)
+        val binding: FragmentHomeBinding = DataBindingUtil.inflate(
+            inflater, R.layout.fragment_home, container, false
+        )
+        //reference to app context
+        //dao ref
+
+        //instance of factory
+        val viewModelFactory = SleepTrackerViewModelFactory(getDBref(), scope2())
+
+        //ref to sleepTrackerViewModel
+        val sleepTrackerViewModel =
+            ViewModelProvider(
+                this, viewModelFactory
+            ).get(HomeViewModel::class.java)
+        binding.setLifecycleOwner(this)
+
+        binding.sleepTrackerViewModel = sleepTrackerViewModel
+        /* val activityReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+             override fun onReceive(context: Context, intent: Intent) {
+                 val bundle = intent.getBundleExtra("msg")
+                 binding.quoteTextView.text = bundle!!.getString("msgBody")
+             }
+         }
+ */
+
+/*        binding.button.setOnClickListener {
+            binding.textview.text = currentDate
+
+        }*/
+        /*    binding.button2.setOnClickListener{
+                if(currentDate.toString() != binding.editTextTIme.toString()){
+                    binding.textView2.text = null
+                }
+            }*/
+
+        // textDate.setText(currentDate)
+
+/*        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+            textDate.text = it
+        })*/
+
         createChannel(
-            getString(R.string.egg_notification_channel_id),
-            getString(R.string.egg_notification_channel_name)
+                getString(R.string.egg_notification_channel_id),
+                getString(R.string.egg_notification_channel_name)
         )
         createChannel(
-            getString(R.string.breakfast_notification_channel_id),
-            getString(R.string.breakfast_notification_channel_name)
+                getString(R.string.breakfast_notification_channel_id),
+                getString(R.string.breakfast_notification_channel_name)
         )
         subscribeTopic()
-        return root
+        binding.sleepTrackerViewModel = sleepTrackerViewModel
+
+        return binding.root
+        /*       fun onCreate(savedInstanceState: Bundle?) {
+                  super.onCreate(savedInstanceState)
+
+                  if (activityReceiver != null) {
+                      val intentFilter = IntentFilter("ACTION_STRING_ACTIVITY")
+                      registerReceiver(activityReceiver, intentFilter)
+                  }
+              }*/
     }
+    fun getDBref(): SleepDatabaseDao {
+        var dataSource = SleepDatabase.getInstance(scope2()).sleepDatabaseDao
+        return dataSource
+    }
+
+    fun scope2(): Application {
+        val application = requireNotNull(this.activity).application
+        return application
+    }
+
+    /*
+        override fun onCreate(savedInstanceState: Bundle?) {
+            val filter = IntentFilter(ConnectivityManager.EXTRA_NO_CONNECTIVITY).apply {
+                addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+            }
+            registerReceiver(br, filter)
+            super.onCreate(savedInstanceState)
+        }
+    */
     private fun createChannel(channelId: String, channelName: String) {
         // TODO: Step 1.6 START create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -72,7 +144,7 @@ class HomeFragment : Fragment() {
             notificationChannel.description = getString(R.string.breakfast_notification_channel_description)
 
             val notificationManager = requireActivity().getSystemService(
-                NotificationManager::class.java
+                    NotificationManager::class.java
             )
 
             notificationManager.createNotificationChannel(notificationChannel)
@@ -92,4 +164,6 @@ class HomeFragment : Fragment() {
             }
         // [END subscribe_topics]
     }
+
+
 }

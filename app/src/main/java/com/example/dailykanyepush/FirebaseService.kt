@@ -1,12 +1,14 @@
 package com.example.dailykanyepush
 
 import android.app.NotificationManager
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.core.content.ContextCompat
+import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.dailykanyepush.receiver.sendNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class FirebaseService: FirebaseMessagingService() {
@@ -17,25 +19,41 @@ class FirebaseService: FirebaseMessagingService() {
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
     // [START receive_message]
-    override fun onMessageReceived(p0: RemoteMessage) {
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: ${p0?.from}")
+        Log.d(TAG, "From: ${remoteMessage?.from}")
 
         //check messages for data
         // Check if message contains a data payload.
-        p0?.data?.let {
-            Log.d(TAG, "Message data payload: " + p0.data)
+        remoteMessage?.data?.let {
+            Log.d(TAG, "Message data payload: " + remoteMessage.data)
+
         }
 
         // check messages for notification and call sendNotification
 /*        // Check if message contains a notification payload.
-  */      p0?.notification?.let {
-            Log.d(TAG, "Message Notification Body: ${it.body}")
-            if(true==false){
-                    sendNotification(it.body!!)
+       // check messages for notification and call sendNotification
+        // Check if message contains a notification payload.*/
 
-                }
+        remoteMessage?.notification?.let {
+            Log.i(TAG, "onMessageReceived: notification.let sarted")
+            val sdf = SimpleDateFormat(" kk:mm")
+            val currentDate = sdf.format(Date())
+
+
+            if (getUserTime() != currentDate ) {
+                Log.i(TAG, "onMessageReceived: if passed")
+                sendNotification(it.body!!)
+            }
         }
+    }//TODO add coruting
+    private fun getUserTime(): String {
+        Log.i(TAG, "getUserTime: started")
+
+        val instanceDB = SleepDatabase.getInstance(application)
+        var userTime = instanceDB.sleepDatabaseDao.getAllNights().toString()
+        return userTime
+
     }
 
     //TODO Step 3.2 log registration token
@@ -64,7 +82,10 @@ class FirebaseService: FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
     private fun sendNotification(messageBody: String) {
-        val notificationManager = ContextCompat.getSystemService(applicationContext, NotificationManager::class.java) as NotificationManager
+        val notificationManager = ContextCompat.getSystemService(
+                applicationContext,
+                NotificationManager::class.java
+        ) as NotificationManager
         notificationManager.sendNotification(messageBody, applicationContext)
     }
 
