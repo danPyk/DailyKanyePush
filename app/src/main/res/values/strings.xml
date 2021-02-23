@@ -43,6 +43,5 @@
     <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
     <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
 
-    <string name="snooze">You shot %1$d pounds of meat</string>
 
 </resources>

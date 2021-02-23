@@ -101,22 +101,7 @@ class HomeFragment : Fragment() {
               }*/
     }
 
-/*    fun getToken(){
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-            // Get new FCM registration token
-            val token = task.result
 
-            // Log and toast
-            val msg = String.format(requireContext().getString(R.string.msg_token_fmt), token)
-
-            Log.d(TAG, msg)
-            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-        })
-    }*/
     fun getDBref(): SleepDatabaseDao {
         var dataSource = SleepDatabase.getInstance(scope2()).sleepDatabaseDao
         return dataSource

@@ -54,12 +54,12 @@ private val FLAGS = 0
  * @param context, activity context.
  */
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
+    //saved message from server
     var stringHolder = applicationContext.openFileInput("myfile")?.bufferedReader()?.useLines { lines ->
         lines.fold("") { some, text ->
             "$some\n$text"
         }
     }
-   // val strNextResultsSize: String = getString(R.string.snooze, nextResultsSize)
 
         // TODO: Step 1.11 create intent
         val contentIntent = Intent(applicationContext, MainActivity::class.java)
@@ -116,16 +116,6 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // Deliver the notification/**/
         notify(NOTIFICATION_ID, builder.build())
     }
-
-
-/*fun setString(): String{
-    var stringHolder = this.openFileInput("myfile")?.bufferedReader()?.useLines { lines ->
-        lines.fold("") { some, text ->
-            "$some\n$text"
-        }
-    }
-    return stringHolder
-}*/
 
 // TODO: Step 1.14 Cancel all notifications
     /**

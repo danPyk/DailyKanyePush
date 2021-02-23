@@ -1,10 +1,7 @@
 package com.example.dailykanyepush
 
 import android.app.NotificationManager
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.android.trackmysleepquality.database.SleepDatabase
@@ -22,35 +19,18 @@ class FirebaseService: FirebaseMessagingService() {
      *
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
-    // [START receive_message]
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: ${remoteMessage?.from}")
 
-        //check messages for data
-             // Check if message contains a data payload.
-/*        remoteMessage?.data?.let {
-            Log.d(TAG, "Message data payload: " + remoteMessage.data)*/
+        //        //while app is in background
             val data = remoteMessage.data
             val myCustomKey = data["my_custom_key"]
             val filename = "myfile"
 
             this.openFileOutput(filename, Context.MODE_PRIVATE).use {
             it.write(myCustomKey?.toByteArray())
+                startTimer()
         }
-        val br: BroadcastReceiver = MyBroadcastReceiver()
-
-        val filter = IntentFilter(NOTIFICATION_SERVICE).apply {
-            addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
-        }
-        registerReceiver(br, filter)
-        Log.d(TAG, "Message data payload:  $myCustomKey" )
-
-        // check messages for notification and call sendNotification
-/*        // Check if message contains a notification payload.
-       // check messages for notification and call sendNotification
-        // Check if message contains a notification payload.*/
-
+        //while app is in foreground
         remoteMessage?.notification?.let {
             Log.i(TAG, "onMessageReceived: notification.let sarted")
             val sdf = SimpleDateFormat(" kk:mm")
@@ -62,15 +42,12 @@ class FirebaseService: FirebaseMessagingService() {
             }
         }
     }//TODO add coruting
-/*    private fun putMessageToDB(night: SleepNight){
-        val instanceDB = SleepDatabase.getInstance(application)
-        instanceDB.sleepDatabaseDao.insert(night)
-    }*/
+
     private fun getUserTime(): String {
         Log.i(TAG, "getUserTime: started")
 
         val instanceDB = SleepDatabase.getInstance(application)
-        var userTime = instanceDB.sleepDatabaseDao.getAllNights().toString()
+        var userTime = instanceDB.sleepDatabaseDao.getUserHour().toString()
         return userTime
     }
 
@@ -109,6 +86,15 @@ class FirebaseService: FirebaseMessagingService() {
     }
     companion object {
         private const val TAG = "MyFirebaseMsgService"
+    }
+    private fun startTimer() {
+        // TODO: Step 1.15 call cancel notification
+        val notificationManager =
+            ContextCompat.getSystemService(
+                this.application,
+                NotificationManager::class.java
+            ) as NotificationManager
+        notificationManager.sendNotification(Context.NOTIFICATION_SERVICE,  this.application)
     }
 
 }
