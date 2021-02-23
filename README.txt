@@ -1,0 +1,1 @@
+Android application which sends daily push notifications with quotes of Kanye West.
