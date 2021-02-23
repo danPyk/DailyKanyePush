@@ -24,7 +24,7 @@ class FirebaseService: FirebaseMessagingService() {
         Log.d(TAG, "From: ${remoteMessage?.from}")
 
         //check messages for data
-        // Check if message contains a data payload.
+             // Check if message contains a data payload.
         remoteMessage?.data?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
@@ -88,6 +88,8 @@ class FirebaseService: FirebaseMessagingService() {
         ) as NotificationManager
         notificationManager.sendNotification(messageBody, applicationContext)
     }
+
+
 
     companion object {
         private const val TAG = "MyFirebaseMsgService"

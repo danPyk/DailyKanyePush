@@ -35,8 +35,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import androidx.core.app.NotificationCompat
 import android.graphics.BitmapFactory
+import androidx.core.app.NotificationCompat
 import com.example.dailykanyepush.MainActivity
 import com.example.dailykanyepush.R
 
@@ -106,9 +106,9 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // TODO: Step 2.5 set priority
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
-
+/**/
     // TODO Step 1.4 call notify
-    // Deliver the notification
+    // Deliver the notification/**/
     notify(NOTIFICATION_ID, builder.build())
 }
 

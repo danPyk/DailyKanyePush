@@ -3,9 +3,11 @@ package com.example.dailykanyepush.ui.home
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent.getIntent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,13 +61,6 @@ class HomeFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
-        /* val activityReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-             override fun onReceive(context: Context, intent: Intent) {
-                 val bundle = intent.getBundleExtra("msg")
-                 binding.quoteTextView.text = bundle!!.getString("msgBody")
-             }
-         }
- */
 
 /*        binding.button.setOnClickListener {
             binding.textview.text = currentDate
@@ -82,14 +77,14 @@ class HomeFragment : Fragment() {
 /*        homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textDate.text = it
         })*/
-
         createChannel(
-                getString(R.string.egg_notification_channel_id),
-                getString(R.string.egg_notification_channel_name)
+            getString(R.string.egg_notification_channel_id),
+            getString(R.string.egg_notification_channel_name)
         )
+        //fcm channel
         createChannel(
-                getString(R.string.breakfast_notification_channel_id),
-                getString(R.string.breakfast_notification_channel_name)
+            getString(R.string.breakfast_notification_channel_id),
+            getString(R.string.breakfast_notification_channel_name)
         )
         subscribeTopic()
         binding.sleepTrackerViewModel = sleepTrackerViewModel
@@ -114,15 +109,9 @@ class HomeFragment : Fragment() {
         return application
     }
 
-    /*
-        override fun onCreate(savedInstanceState: Bundle?) {
-            val filter = IntentFilter(ConnectivityManager.EXTRA_NO_CONNECTIVITY).apply {
-                addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
-            }
-            registerReceiver(br, filter)
-            super.onCreate(savedInstanceState)
-        }
-    */
+
+
+
     private fun createChannel(channelId: String, channelName: String) {
         // TODO: Step 1.6 START create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -144,7 +133,7 @@ class HomeFragment : Fragment() {
             notificationChannel.description = getString(R.string.breakfast_notification_channel_description)
 
             val notificationManager = requireActivity().getSystemService(
-                    NotificationManager::class.java
+                NotificationManager::class.java
             )
 
             notificationManager.createNotificationChannel(notificationChannel)
@@ -152,6 +141,7 @@ class HomeFragment : Fragment() {
         }
         // TODO: Step 1.6 END create channel
     }
+    //allow send notif to multiple users
     private fun subscribeTopic() {
         // [START subscribe_topic]
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
