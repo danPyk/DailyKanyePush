@@ -11,19 +11,18 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
-    <string name="msg_token_fmt">token</string>
     <string name="breakfast_notification_channel_id" translatable="false">fcm_default_channel</string>
 
     <string name="breakfast_notification_channel_name" translatable="true">Breakfast</string>
     <string name="breakfast_notification_channel_description">Breakfast reminder</string>
-    <string name="message_subscribe_failed">Failed to subscribe to topic</string>
-    <string name="message_subscribed">Subscribed to topic</string>
+    <string name="message_subscribe_failed">Failed to subscribe to topicxx</string>
+    <string name="message_subscribed">Subscribed to topi</string>
 
-    <string name="eggs_ready">Subscribed to topic</string>
+    <string name="eggs_ready">Subscribed to topicxxxxxxxxxxxx</string>
     <string name="egg_notification_channel_name" translatable="true">Egg</string>
     <string name="egg_notification_channel_id">Subscribed to topic</string>
-    <string name="notification_title">Subscribed to topic</string>
-    <string name="snooze">Subscribed to topic</string>
+    <string name="notification_title">Kanye Push</string>
+    <!--here-->
 
     <!-- Sleep quality strings -->
     <string name="how_was_hour_sleep">How was your sleep?</string>
@@ -33,6 +32,9 @@
     <string name="three_ok">OK</string>
     <string name="four_pretty_good">Pretty good</string>
     <string name="five_excellent">Excellent!</string>
+    //TODO
+    <string name="tok">c01MUL8eTtmiwuOxKAw39Z:APA91bFAEUmeetqLpFGT-0_3-IpQHbn3-PiDVnC5hQmXP4v6Cvh8KiMTVW9pIKXDWPamqigyd3cIie3DlnYt06N9Gk0zfLZ9Uc0h1HK3KV56HlC-Rs3omybYzPWmG_kTtyvAmIg7EhJD!</string>
+    <string name="timer_run">timerRunnnnn</string>
 
     <!-- Output to TextView styled with a little HTML -->
     <string name="title"><![CDATA[<h3>HERE IS YOUR SLEEP DATA</h3>]]></string>
@@ -40,4 +42,7 @@
     <string name="end_time"><![CDATA[<b>End:</b>]]></string>
     <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
     <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
+
+    <string name="snooze">You shot %1$d pounds of meat</string>
+
 </resources>

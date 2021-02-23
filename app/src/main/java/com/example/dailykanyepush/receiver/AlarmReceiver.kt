@@ -37,4 +37,5 @@ class AlarmReceiver: BroadcastReceiver() {
         notificationManager.sendNotification(context.getText(R.string.eggs_ready).toString(), context)
     }
 
+
 }

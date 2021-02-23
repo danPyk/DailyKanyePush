@@ -3,15 +3,12 @@ package com.example.dailykanyepush.ui.home
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Intent.getIntent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -31,7 +28,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 //first deploy on phone, then thinking how to manage hours
 
 class HomeFragment : Fragment() {
-    private val TOPIC = "Daily-Kanye"
+    private val TOPIC = "kanyepush"
 
     private lateinit var homeViewModel: HomeViewModel
    // val br: BroadcastReceiver = MyBroadcastReceiver()
@@ -61,11 +58,15 @@ class HomeFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
-
-/*        binding.button.setOnClickListener {
-            binding.textview.text = currentDate
-
-        }*/
+/*
+        binding.button.setOnClickListener {
+            binding.quoteTextView.text = context?.openFileInput("myfile")?.bufferedReader()?.useLines { lines ->
+                lines.fold("") { some, text ->
+                    "$some\n$text"
+                }
+            }
+        }
+*/
         /*    binding.button2.setOnClickListener{
                 if(currentDate.toString() != binding.editTextTIme.toString()){
                     binding.textView2.text = null
@@ -86,7 +87,7 @@ class HomeFragment : Fragment() {
             getString(R.string.breakfast_notification_channel_id),
             getString(R.string.breakfast_notification_channel_name)
         )
-        subscribeTopic()
+       subscribeTopic()
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
         return binding.root
@@ -99,6 +100,23 @@ class HomeFragment : Fragment() {
                   }
               }*/
     }
+
+/*    fun getToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            val msg = String.format(requireContext().getString(R.string.msg_token_fmt), token)
+
+            Log.d(TAG, msg)
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        })
+    }*/
     fun getDBref(): SleepDatabaseDao {
         var dataSource = SleepDatabase.getInstance(scope2()).sleepDatabaseDao
         return dataSource
@@ -108,9 +126,6 @@ class HomeFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         return application
     }
-
-
-
 
     private fun createChannel(channelId: String, channelName: String) {
         // TODO: Step 1.6 START create a channel
@@ -150,7 +165,6 @@ class HomeFragment : Fragment() {
                 if (!task.isSuccessful) {
                     message = getString(R.string.message_subscribe_failed)
                 }
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
         // [END subscribe_topics]
     }
