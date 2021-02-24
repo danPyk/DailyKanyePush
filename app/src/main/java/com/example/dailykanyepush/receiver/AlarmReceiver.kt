@@ -1,18 +1,7 @@
 /*
- * Copyright (C) 2019 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+import com.example.dailykanyepush.receiver.sendNotification
+
+
 
 package com.example.dailykanyepush.receiver
 
@@ -29,7 +18,7 @@ class AlarmReceiver: BroadcastReceiver() {
         // TODO: Step 1.10 [Optional] remove toast
         //Toast.makeText(context, context.getText(R.string.eggs_ready), Toast.LENGTH_SHORT).show()
 
-        // TODO: Step 1.9 add call to sendNotification
+        // nnh TODO: Step 1.9 add call to sendNotification
         val notificationManager = ContextCompat.getSystemService(
             context,
             NotificationManager::class.java
@@ -39,3 +28,4 @@ class AlarmReceiver: BroadcastReceiver() {
 
 
 }
+*/

@@ -60,7 +60,6 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
             "$some\n$text"
         }
     }
-
         // TODO: Step 1.11 create intent
         val contentIntent = Intent(applicationContext, MainActivity::class.java)
 
@@ -81,9 +80,9 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
                 .bigPicture(eggImage)
                 .bigLargeIcon(null)
         // TODO: Step 2.2 add snooze action
-        val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
-        val snoozePendingIntent: PendingIntent =
-                PendingIntent.getBroadcast(applicationContext, REQUEST_CODE, snoozeIntent, FLAGS)
+      //  val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
+       // val snoozePendingIntent: PendingIntent =
+               // PendingIntent.getBroadcast(applicationContext, REQUEST_CODE, snoozeIntent, FLAGS)
 
         // TODO: Step 1.2 get an instance of NotificationCompat.Builder
         // Build the notification, support prev ver of andoird
@@ -106,12 +105,11 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
                 .addAction(
                         R.drawable.egg_icon,
                         stringHolder,
-                        snoozePendingIntent
+                        null
                 )
                 // TODO: Step 2.5 set priority
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
-/**/
         // TODO Step 1.4 call notify
         // Deliver the notification/**/
         notify(NOTIFICATION_ID, builder.build())
@@ -122,7 +120,4 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
      * Cancels all notifications.
      *
      */
-    fun NotificationManager.cancelNotifications() {
-        cancelAll()
-    }
 

@@ -19,7 +19,7 @@
     <string name="message_subscribed">Subscribed to topi</string>
 
     <string name="eggs_ready">Subscribed to topicxxxxxxxxxxxx</string>
-    <string name="egg_notification_channel_name" translatable="true">Egg</string>
+    <string name="egg_notification_channel_name" translatable="true">Push message</string>
     <string name="egg_notification_channel_id">Subscribed to topic</string>
     <string name="notification_title">Kanye Push</string>
     <!--here-->

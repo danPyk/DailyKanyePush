@@ -1,6 +1,5 @@
 package com.example.dailykanyepush.ui.home
 
-import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.graphics.Color
@@ -13,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.trackmysleepquality.database.SleepDatabase
-import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.dailykanyepush.R
 import com.example.dailykanyepush.databinding.FragmentHomeBinding
 import com.google.firebase.messaging.FirebaseMessaging
@@ -44,11 +42,13 @@ class HomeFragment : Fragment() {
         val binding: FragmentHomeBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home, container, false
         )
-        //reference to app context
-        //dao ref
 
-        //instance of factory
-        val viewModelFactory = SleepTrackerViewModelFactory(getDBref(), scope2())
+
+        val application = requireNotNull(this.activity).application
+        //dao ref
+        var dataSource = SleepDatabase.getInstance(application)
+
+        val viewModelFactory = SleepTrackerViewModelFactory(dataSource.sleepDatabaseDao, application)
 
         //ref to sleepTrackerViewModel
         val sleepTrackerViewModel =
@@ -58,20 +58,6 @@ class HomeFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
-/*
-        binding.button.setOnClickListener {
-            binding.quoteTextView.text = context?.openFileInput("myfile")?.bufferedReader()?.useLines { lines ->
-                lines.fold("") { some, text ->
-                    "$some\n$text"
-                }
-            }
-        }
-*/
-        /*    binding.button2.setOnClickListener{
-                if(currentDate.toString() != binding.editTextTIme.toString()){
-                    binding.textView2.text = null
-                }
-            }*/
 
         // textDate.setText(currentDate)
 
@@ -83,12 +69,11 @@ class HomeFragment : Fragment() {
             getString(R.string.egg_notification_channel_name)
         )
         //fcm channel
-        createChannel(
+/*        createChannel(
             getString(R.string.breakfast_notification_channel_id),
             getString(R.string.breakfast_notification_channel_name)
-        )
+        )*/
        subscribeTopic()
-        binding.sleepTrackerViewModel = sleepTrackerViewModel
 
         return binding.root
         /*       fun onCreate(savedInstanceState: Bundle?) {
@@ -101,16 +86,6 @@ class HomeFragment : Fragment() {
               }*/
     }
 
-
-    fun getDBref(): SleepDatabaseDao {
-        var dataSource = SleepDatabase.getInstance(scope2()).sleepDatabaseDao
-        return dataSource
-    }
-
-    fun scope2(): Application {
-        val application = requireNotNull(this.activity).application
-        return application
-    }
 
     private fun createChannel(channelId: String, channelName: String) {
         // TODO: Step 1.6 START create a channel
@@ -137,7 +112,6 @@ class HomeFragment : Fragment() {
             )
 
             notificationManager.createNotificationChannel(notificationChannel)
-
         }
         // TODO: Step 1.6 END create channel
     }

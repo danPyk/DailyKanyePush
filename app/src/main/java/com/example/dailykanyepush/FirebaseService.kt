@@ -38,7 +38,7 @@ class FirebaseService: FirebaseMessagingService() {
 
             if (getUserTime() != currentDate ) {
                 Log.i(TAG, "onMessageReceived: if passed")
-                sendNotification(it.body!!)
+               // sendNotification(it.body!!)
             }
         }
     }//TODO add coruting
@@ -47,7 +47,7 @@ class FirebaseService: FirebaseMessagingService() {
         Log.i(TAG, "getUserTime: started")
 
         val instanceDB = SleepDatabase.getInstance(application)
-        var userTime = instanceDB.sleepDatabaseDao.getUserHour().toString()
+        var userTime = instanceDB.sleepDatabaseDao.getAllNights().toString()
         return userTime
     }
 
@@ -76,25 +76,35 @@ class FirebaseService: FirebaseMessagingService() {
      *
      * @param messageBody FCM message body received.
      *///todo
-    private fun sendNotification(messageBody: String) {
+/*    private fun sendNotification(messageBody: String) {
 
         val notificationManager = ContextCompat.getSystemService(
                 applicationContext,
                 NotificationManager::class.java
         ) as NotificationManager
         notificationManager.sendNotification(messageBody, applicationContext)
-    }
+    }*/
     companion object {
         private const val TAG = "MyFirebaseMsgService"
     }
+    //todo check sendnotification arguments
     private fun startTimer() {
+
         // TODO: Step 1.15 call cancel notification
         val notificationManager =
             ContextCompat.getSystemService(
                 this.application,
                 NotificationManager::class.java
             ) as NotificationManager
-        notificationManager.sendNotification(Context.NOTIFICATION_SERVICE,  this.application)
+        notificationManager.cancelNotifications()
+
+       notificationManager.sendNotification(Context.NOTIFICATION_SERVICE,  this.application)
+
+
     }
+    fun NotificationManager.cancelNotifications() {
+        cancelAll()
+    }
+
 
 }

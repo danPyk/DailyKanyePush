@@ -29,25 +29,6 @@ import java.text.SimpleDateFormat
 
 private const val TAG = "Util"
 
-/**
- * These functions create a formatted string that can be set in a TextView.
- */
-
-/**
- * Returns a string representing the numeric quality rating.
- */
-fun convertNumericQualityToString(quality: Int, resources: Resources): String {
-    var qualityString = resources.getString(R.string.three_ok)
-    when (quality) {
-        -1 -> qualityString = "--"
-        0 -> qualityString = resources.getString(R.string.zero_very_bad)
-        1 -> qualityString = resources.getString(R.string.one_poor)
-        2 -> qualityString = resources.getString(R.string.two_soso)
-        4 -> qualityString = resources.getString(R.string.four_pretty_good)
-        5 -> qualityString = resources.getString(R.string.five_excellent)
-    }
-    return qualityString
-}
 
 /**
  * Take the Long milliseconds returned by the system and stored in Room,
@@ -63,8 +44,6 @@ fun convertLongToDateString(systemTime: Long): String {
     return SimpleDateFormat("kk:mm")
             .format(systemTime).toString()
 }
-
-
 /**
  * Takes a list of SleepNights and converts and formats it into one string for display.
  *
@@ -77,23 +56,22 @@ fun convertLongToDateString(systemTime: Long): String {
  *
  * @return  Spanned - An interface for text that has formatting attached to it.
  *           See: https://developer.android.com/reference/android/text/Spanned
- *///TODO change list to signle string
+ */
 fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
-    val sb = StringBuilder()
-    sb.apply {
+    val stringBuilder = StringBuilder()
+    stringBuilder.apply {
         append(resources.getString(R.string.title))
         nights.forEach {
-
             append("\t${convertLongToDateString(it.startTimeMilli)}")
         }
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Log.i(TAG, "formatNights: finished")
-        return Html.fromHtml(sb.toString(), Html.FROM_HTML_MODE_LEGACY)
+        return Html.fromHtml(stringBuilder.toString(), Html.FROM_HTML_MODE_LEGACY)
 
     } else {
         Log.i(TAG, "formatNights: else  finished")
 
-        return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        return HtmlCompat.fromHtml(stringBuilder.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }
