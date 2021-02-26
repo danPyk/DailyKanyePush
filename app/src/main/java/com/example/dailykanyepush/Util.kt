@@ -18,17 +18,30 @@ package com.example.android.trackmysleepquality
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
-import android.os.Build
-import android.text.Html
-import android.text.Spanned
-import android.util.Log
-import androidx.core.text.HtmlCompat
-import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.dailykanyepush.R
 import java.text.SimpleDateFormat
 
 private const val TAG = "Util"
 
+/**
+ * These functions create a formatted string that can be set in a TextView.
+ */
+
+/**
+ * Returns a string representing the numeric quality rating.
+ */
+fun convertNumericQualityToString(quality: Int, resources: Resources): String {
+    var qualityString = resources.getString(R.string.three_ok)
+    when (quality) {
+        -1 -> qualityString = "--"
+        0 -> qualityString = resources.getString(R.string.zero_very_bad)
+        1 -> qualityString = resources.getString(R.string.one_poor)
+        2 -> qualityString = resources.getString(R.string.two_soso)
+        4 -> qualityString = resources.getString(R.string.four_pretty_good)
+        5 -> qualityString = resources.getString(R.string.five_excellent)
+    }
+    return qualityString
+}
 
 /**
  * Take the Long milliseconds returned by the system and stored in Room,
@@ -42,8 +55,10 @@ private const val TAG = "Util"
 @SuppressLint("SimpleDateFormat")
 fun convertLongToDateString(systemTime: Long): String {
     return SimpleDateFormat("kk:mm")
-            .format(systemTime).toString()
+        .format(systemTime).toString()
 }
+
+
 /**
  * Takes a list of SleepNights and converts and formats it into one string for display.
  *
@@ -56,22 +71,4 @@ fun convertLongToDateString(systemTime: Long): String {
  *
  * @return  Spanned - An interface for text that has formatting attached to it.
  *           See: https://developer.android.com/reference/android/text/Spanned
- */
-fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
-    val stringBuilder = StringBuilder()
-    stringBuilder.apply {
-        append(resources.getString(R.string.title))
-        nights.forEach {
-            append("\t${convertLongToDateString(it.startTimeMilli)}")
-        }
-    }
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Log.i(TAG, "formatNights: finished")
-        return Html.fromHtml(stringBuilder.toString(), Html.FROM_HTML_MODE_LEGACY)
-
-    } else {
-        Log.i(TAG, "formatNights: else  finished")
-
-        return HtmlCompat.fromHtml(stringBuilder.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
-}
+ *///TODO change list to signle string

@@ -4,12 +4,16 @@ import android.app.NotificationManager
 import android.content.Context
 import android.util.Log
 import androidx.core.content.ContextCompat
-import com.example.android.trackmysleepquality.database.SleepDatabase
+import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.dailykanyepush.receiver.sendNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class FirebaseService: FirebaseMessagingService() {
@@ -21,35 +25,48 @@ class FirebaseService: FirebaseMessagingService() {
      */
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
-        //        //while app is in background
+        remoteMessage?.data?.let {
             val data = remoteMessage.data
-            val myCustomKey = data["my_custom_key"]
+            val myCustomKey = data["key"]
             val filename = "myfile"
 
-            this.openFileOutput(filename, Context.MODE_PRIVATE).use {
-            it.write(myCustomKey?.toByteArray())
-                startTimer()
-        }
-        //while app is in foreground
-        remoteMessage?.notification?.let {
             Log.i(TAG, "onMessageReceived: notification.let sarted")
             val sdf = SimpleDateFormat(" kk:mm")
-            val currentDate = sdf.format(Date())
+            val currentTime = sdf.format(Date()).trim()
 
-            if (getUserTime() != currentDate ) {
-                Log.i(TAG, "onMessageReceived: if passed")
-               // sendNotification(it.body!!)
+            this.openFileOutput(filename, Context.MODE_PRIVATE).use {
+                it.write(myCustomKey?.toByteArray())
             }
+
+            val saveRequest =
+                PeriodicWorkRequestBuilder<MessageWork>(24, TimeUnit.HOURS)
+                  //  .setInitialDelay()
+          //  PeriodicWorkRequest.DEFAULT_BACKOFF_DELAY_MILLIS
+                    .build()
+            WorkManager.getInstance(applicationContext).enqueue(saveRequest)
+
+
+          if (res == currentTime ) {
+                Log.i(TAG, "onMessageReceived: if passed")
+                // sendNotification(it.body!!)
+                startTimer()
+         }
+        }
+        //wile app is in foreground
+        remoteMessage?.notification?.let {
+
         }
     }//TODO add coruting
 
-    private fun getUserTime(): String {
-        Log.i(TAG, "getUserTime: started")
-
-        val instanceDB = SleepDatabase.getInstance(application)
-        var userTime = instanceDB.sleepDatabaseDao.getAllNights().toString()
-        return userTime
+    fun getDataFromUser(): String?{
+        var stringHolder: String? = application?.openFileInput("myfileeeeeeeee")?.bufferedReader()?.useLines { lines ->
+            lines.fold("") { some, text ->
+                "$some\n$text"
+            }
+        }
+        return stringHolder?.trim()
     }
+
 
     //TODO Step 3.2 log registration token
     // [START on_new_token]
@@ -58,6 +75,7 @@ class FirebaseService: FirebaseMessagingService() {
      * the previous token had been compromised. Note that this is called when the InstanceID token
      * is initially generated so this is where you would retrieve the token.
      */
+
     override fun onNewToken(p0: String) {
         Log.d(TAG, "Refreshed token is $p0")
         sendRegistrationToServer(p0)
@@ -99,8 +117,6 @@ class FirebaseService: FirebaseMessagingService() {
         notificationManager.cancelNotifications()
 
        notificationManager.sendNotification(Context.NOTIFICATION_SERVICE,  this.application)
-
-
     }
     fun NotificationManager.cancelNotifications() {
         cancelAll()

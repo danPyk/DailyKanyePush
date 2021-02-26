@@ -11,9 +11,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.dailykanyepush.R
-import com.example.dailykanyepush.databinding.FragmentHomeBinding
 import com.google.firebase.messaging.FirebaseMessaging
 
 
@@ -39,16 +37,14 @@ class HomeFragment : Fragment() {
 /*        homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)*/
         //cval root = inflater.inflate(R.layout.fragment_home, container, false)
-        val binding: FragmentHomeBinding = DataBindingUtil.inflate(
+        val binding: com.example.dailykanyepush.databinding.FragmentHomeBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home, container, false
         )
-
-
         val application = requireNotNull(this.activity).application
         //dao ref
-        var dataSource = SleepDatabase.getInstance(application)
+       // var dataSource = SleepDatabase.getInstance(application)
 
-        val viewModelFactory = SleepTrackerViewModelFactory(dataSource.sleepDatabaseDao, application)
+        val viewModelFactory = SleepTrackerViewModelFactory( application)
 
         //ref to sleepTrackerViewModel
         val sleepTrackerViewModel =
@@ -58,12 +54,18 @@ class HomeFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
+        binding.btnDB.setOnClickListener{
+            sleepTrackerViewModel.onStartTracking()
+            var stringHolder = context?.openFileInput("myfileeeeeeeee")?.bufferedReader()?.useLines { lines ->
+                lines.fold("") { some, text ->
+                    "$some\n$text"
+                }
+            }
+            binding.quoteTextView.text = stringHolder
+        }
 
         // textDate.setText(currentDate)
 
-/*        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textDate.text = it
-        })*/
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
@@ -73,17 +75,9 @@ class HomeFragment : Fragment() {
             getString(R.string.breakfast_notification_channel_id),
             getString(R.string.breakfast_notification_channel_name)
         )*/
-       subscribeTopic()
+        subscribeTopic()
 
         return binding.root
-        /*       fun onCreate(savedInstanceState: Bundle?) {
-                  super.onCreate(savedInstanceState)
-
-                  if (activityReceiver != null) {
-                      val intentFilter = IntentFilter("ACTION_STRING_ACTIVITY")
-                      registerReceiver(activityReceiver, intentFilter)
-                  }
-              }*/
     }
 
 
