@@ -52,7 +52,10 @@ private val FLAGS = 0
  *
  * @param messageBody, notification text.
  * @param context, activity context.
+ *
+ *
  */
+
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
     //saved message from server
     var stringHolder = applicationContext.openFileInput("myfile")?.bufferedReader()?.useLines { lines ->
@@ -114,6 +117,33 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         // Deliver the notification/**/
         notify(NOTIFICATION_ID, builder.build())
     }
+
+/*fun startNoti() {
+    // TODO: Step 1.15 call cancel notification
+    val notificationManager =
+        ContextCompat.getSystemService(
+            this,
+            NotificationManager::class.java
+        ) as NotificationManager
+    notificationManager.cancelNotifications()
+
+    notificationManager.sendNotification(Context.NOTIFICATION_SERVICE,  this)
+}*/
+
+fun NotificationManager.cancelNotifications() {
+    cancelAll()
+}
+/*
+private fun sendNotification(messageBody: String) {
+
+    val notificationManager = ContextCompat.getSystemService(
+        getC,
+        NotificationManager::class.java
+    ) as NotificationManager
+    notificationManager.sendNotification(messageBody, null)
+}
+*/
+
 
 // TODO: Step 1.14 Cancel all notifications
     /**

@@ -27,7 +27,6 @@ class HomeFragment : Fragment() {
     private val TOPIC = "kanyepush"
 
     private lateinit var homeViewModel: HomeViewModel
-   // val br: BroadcastReceiver = MyBroadcastReceiver()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +54,7 @@ class HomeFragment : Fragment() {
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
         binding.btnDB.setOnClickListener{
-            sleepTrackerViewModel.onStartTracking()
+            sleepTrackerViewModel.onStartTracking(binding.editTextTIme.date())
             var stringHolder = context?.openFileInput("myfileeeeeeeee")?.bufferedReader()?.useLines { lines ->
                 lines.fold("") { some, text ->
                     "$some\n$text"
@@ -121,6 +120,5 @@ class HomeFragment : Fragment() {
             }
         // [END subscribe_topics]
     }
-
 
 }
