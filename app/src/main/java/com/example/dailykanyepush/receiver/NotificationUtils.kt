@@ -46,7 +46,6 @@ private val NOTIFICATION_ID = 0
 private val REQUEST_CODE = 0
 private val FLAGS = 0
 
-// TODO: Step 1.1 extension function to send messages (GIVEN)
 /**
  * Builds and delivers the notification.
  *
@@ -77,11 +76,6 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         val bigPicStyle = NotificationCompat.BigPictureStyle()
                 .bigPicture(eggImage)
                 .bigLargeIcon(null)
-        // TODO: Step 2.2 add snooze action
-      //  val snoozeIntent = Intent(applicationContext, SnoozeReceiver::class.java)
-       // val snoozePendingIntent: PendingIntent =
-               // PendingIntent.getBroadcast(applicationContext, REQUEST_CODE, snoozeIntent, FLAGS)
-
         // TODO: Step 1.2 get an instance of NotificationCompat.Builder
         // Build the notification, support prev ver of andoird
         val builder = NotificationCompat.Builder(

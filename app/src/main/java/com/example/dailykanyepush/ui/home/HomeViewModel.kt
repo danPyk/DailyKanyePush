@@ -8,11 +8,10 @@ const val TAG = "HomeViewModel"
 class HomeViewModel(application: Application) :
     AndroidViewModel(application) {
 
+
+
     private val context = getApplication<Application>().applicationContext
-/*    private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
-    }
-    val text: LiveData<String> = _text*/
+
 
     fun getQuote(): String {
         var userHourString =
@@ -23,7 +22,10 @@ class HomeViewModel(application: Application) :
                     }
                 }
         var userHours = userHourString!!.trim()
-        return userHours
+        return if( userHours.isNotEmpty()){
+            userHours
+        }else
+            ""
     }
 
 }

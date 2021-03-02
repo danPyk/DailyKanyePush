@@ -30,43 +30,38 @@ class HomeFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-/*        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)*/
-        //cval root = inflater.inflate(R.layout.fragment_home, container, false)
-        val binding: com.example.dailykanyepush.databinding.FragmentHomeBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_home, container, false
-        )
+        val binding: com.example.dailykanyepush.databinding.FragmentHomeBinding =
+            DataBindingUtil.inflate(
+                inflater, R.layout.fragment_home, container, false
+            )
+
         val application = requireNotNull(this.activity).application
 
-        val viewModelFactory = SleepTrackerViewModelFactory( application)
+        val viewModelFactory = SleepTrackerViewModelFactory(application)
 
         //ref to sleepTrackerViewModel
         val sleepTrackerViewModel =
             ViewModelProvider(
                 this, viewModelFactory
             ).get(HomeViewModel::class.java)
+
         binding.setLifecycleOwner(this)
 
-       binding.sleepTrackerViewModel = sleepTrackerViewModel
-
-     /*   homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
-        })*/
-      if (sleepTrackerViewModel.getQuote().isNotEmpty()){
-          binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
-      }
+        binding.sleepTrackerViewModel = sleepTrackerViewModel
+        binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
+        binding.quoteTextView.invalidate()
 
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
         )
-
         subscribeTopic()
 
         return binding.root
     }
+
     private fun createChannel(channelId: String, channelName: String) {
         // TODO: Step 1.6 START create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -85,7 +80,8 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.RED
             notificationChannel.enableVibration(true)
-            notificationChannel.description = getString(R.string.breakfast_notification_channel_description)
+            notificationChannel.description =
+                getString(R.string.breakfast_notification_channel_description)
 
             val notificationManager = requireActivity().getSystemService(
                 NotificationManager::class.java
@@ -95,6 +91,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         }
         // TODO: Step 1.6 END create channel
     }
+
     //allow send notif to multiple users
     private fun subscribeTopic() {
         // [START subscribe_topic]
@@ -107,7 +104,6 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             }
         // [END subscribe_topics]
     }
-
 
 
 }
