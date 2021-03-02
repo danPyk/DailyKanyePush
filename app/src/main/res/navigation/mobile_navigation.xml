@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.dailykanyepush.ui.gallery.GalleryFragment"
+        android:name="com.example.dailykanyepush.ui.settings.SettingsFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_settings" />
 <!--
     <fragment
         android:id="@+id/nav_slideshow"

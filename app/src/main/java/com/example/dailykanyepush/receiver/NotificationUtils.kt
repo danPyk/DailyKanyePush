@@ -57,12 +57,7 @@ private val FLAGS = 0
  */
 
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
-    //saved message from server
-    var stringHolder = applicationContext.openFileInput("myfile")?.bufferedReader()?.useLines { lines ->
-        lines.fold("") { some, text ->
-            "$some\n$text"
-        }
-    }
+
         // TODO: Step 1.11 create intent
         val contentIntent = Intent(applicationContext, MainActivity::class.java)
 
@@ -107,7 +102,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
                 // TODO: Step 2.3 add snooze action
                 .addAction(
                         R.drawable.egg_icon,
-                        stringHolder,
+                    messageBody,
                         null
                 )
                 // TODO: Step 2.5 set priority

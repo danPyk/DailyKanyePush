@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.dailykanyepush.R
 import com.google.firebase.messaging.FirebaseMessaging
@@ -23,7 +22,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 //delete one cart
 //first deploy on phone, then thinking how to manage hours
 
-class HomeFragment : Fragment() {
+class HomeFragment : androidx.fragment.app.Fragment() {
     private val TOPIC = "kanyepush"
 
     private lateinit var homeViewModel: HomeViewModel
@@ -40,8 +39,6 @@ class HomeFragment : Fragment() {
             inflater, R.layout.fragment_home, container, false
         )
         val application = requireNotNull(this.activity).application
-        //dao ref
-       // var dataSource = SleepDatabase.getInstance(application)
 
         val viewModelFactory = SleepTrackerViewModelFactory( application)
 
@@ -52,34 +49,24 @@ class HomeFragment : Fragment() {
             ).get(HomeViewModel::class.java)
         binding.setLifecycleOwner(this)
 
-        binding.sleepTrackerViewModel = sleepTrackerViewModel
-        binding.btnDB.setOnClickListener{
-            sleepTrackerViewModel.onStartTracking(binding.editTextTIme.date())
-            var stringHolder = context?.openFileInput("myfileeeeeeeee")?.bufferedReader()?.useLines { lines ->
-                lines.fold("") { some, text ->
-                    "$some\n$text"
-                }
-            }
-            binding.quoteTextView.text = stringHolder
-        }
+       binding.sleepTrackerViewModel = sleepTrackerViewModel
 
-        // textDate.setText(currentDate)
+     /*   homeViewModel.text.observe(viewLifecycleOwner, Observer {
+            binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
+        })*/
+      if (sleepTrackerViewModel.getQuote().isNotEmpty()){
+          binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
+      }
 
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
         )
-        //fcm channel
-/*        createChannel(
-            getString(R.string.breakfast_notification_channel_id),
-            getString(R.string.breakfast_notification_channel_name)
-        )*/
+
         subscribeTopic()
 
         return binding.root
     }
-
-
     private fun createChannel(channelId: String, channelName: String) {
         // TODO: Step 1.6 START create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -120,5 +107,7 @@ class HomeFragment : Fragment() {
             }
         // [END subscribe_topics]
     }
+
+
 
 }

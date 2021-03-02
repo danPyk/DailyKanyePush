@@ -1,9 +1,8 @@
-package com.example.dailykanyepush.notofication
+package com.example.dailykanyepush.notifications
 
 import android.app.NotificationManager
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -27,9 +26,8 @@ const val KEY_RESULT = "result"
                     NotificationManager::class.java
                 ) as NotificationManager
             notificationManager.sendNotification(text, applicationContext)
-             Toast.makeText(applicationContext, "doWorkOnTheEnd", Toast.LENGTH_SHORT).show()
+           //  Toast.makeText(applicationContext, "doWorkOnTheEnd", Toast.LENGTH_SHORT).show()
 
-        addingDebug()
             return Result.success()
         }
         catch (throwable: Throwable) {
@@ -44,11 +42,4 @@ const val KEY_RESULT = "result"
     }
 
 }
-
-fun addingDebug(): Int{
-    var sum = 3
-    return sum
-}
-
-
 

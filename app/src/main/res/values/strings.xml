@@ -43,5 +43,7 @@
     <string name="quality"><![CDATA[<b>Quality:</b>]]></string>
     <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
 
+    <string name="set_time">Set time: %1$s</string>
+
 
 </resources>
