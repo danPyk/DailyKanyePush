@@ -14,7 +14,7 @@ class ChooseSettingsFragment : PreferenceFragmentCompat() {
         val preferenceFragment: Preference? = findPreference(getString(R.string.timer_key))
 
         preferenceFragment?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            view?.findNavController()?.navigate(R.id.action_nav_choose_settings_to_nav_settings2)
+            view?.findNavController()?.navigate(R.id.nav_settings)
             true
         }
 

@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TimePicker
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.dailykanyepush.R
@@ -43,18 +42,7 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
         binding.settingsViewModel = settingsViewModel
 
 
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-
-  /*      toolbar.setNavigationOnClickListener {
-            val navController = Navigation.findNavController(requireActivity(),
-                R.id.nav_host_fragment)
-            navController.navigateUp()
-
-        }
-*/
-
         binding.timePicker.setIs24HourView(true)
-        //format timepicker to 24h
         hideKeyboardInputInTimePicker(this.resources.configuration.orientation, binding.timePicker)
 
         binding.btnDB.setOnClickListener{
@@ -101,29 +89,5 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
 
         }
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-
-       // activity?.actionBar?.setLogo(R.drawable.kanye2)
-
-
-        super.onViewCreated(view, savedInstanceState)
-    }
-/*
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-
-                onBackPressed()
-
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed(): Boolean {
-return true    }*/
 
 }
