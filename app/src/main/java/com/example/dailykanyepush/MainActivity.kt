@@ -1,16 +1,13 @@
 package com.example.dailykanyepush
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.dailykanyepush.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(){
@@ -22,12 +19,10 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         var binding: ActivityMainBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         drawerLayout = binding.drawerLayout
-        //TODO
-        //val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -36,16 +31,15 @@ class MainActivity : AppCompatActivity(){
                 R.id.nav_home, R.id.nav_settings, R.id.nav_about
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
 
-        binding.navView.setupWithNavController(navController)
+        NavigationUI.setupWithNavController(binding.navView, navController)
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+/*    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
+        menuInflater.inflate(R.menu.dot_menu, menu)
         return true
-    }
+    }*/
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
@@ -53,6 +47,12 @@ class MainActivity : AppCompatActivity(){
 
     interface IOnBackPressed {
         fun onBackPressed(): Boolean
+    }
+    override fun onBackPressed() {
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(android.R.id.main_container)
+        if (fragment !is IOnBackPressed || !(fragment as IOnBackPressed?)!!.onBackPressed()) {
+            super.onBackPressed()
+        }
     }
 
 

@@ -42,6 +42,8 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
         binding.settingsViewModel = settingsViewModel
 
 
+        activity?.actionBar?.setLogo(R.drawable.ic_arrow_back_24px)
+
         binding.timePicker.setIs24HourView(true)
         hideKeyboardInputInTimePicker(this.resources.configuration.orientation, binding.timePicker)
 
