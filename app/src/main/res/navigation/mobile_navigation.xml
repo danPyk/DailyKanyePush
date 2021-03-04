@@ -12,19 +12,23 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_settings"
         android:name="com.example.dailykanyepush.ui.settings.SettingsFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings"/>
+
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_about"
         android:name="com.example.dailykanyepush.ui.slideshow.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" />
-    <!--
-        <fragment
-            android:id="@+id/nav_slideshow"
-            android:name="com.example.dailykanyepush.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_slideshow"
-            tools:layout="@layout/fragment_slideshow" />-->
+    <fragment
+        android:id="@+id/nav_choose_settings"
+        android:name="com.example.dailykanyepush.ui.ChooseSettingsFragment"
+        android:label="ChooseSettingsFragment" >
+        <action
+            android:id="@+id/action_nav_choose_settings_to_nav_settings2"
+            app:destination="@id/nav_settings" />
+    </fragment>
+
 </navigation>

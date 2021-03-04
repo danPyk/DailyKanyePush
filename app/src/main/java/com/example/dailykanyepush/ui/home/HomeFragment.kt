@@ -53,6 +53,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
         binding.quoteTextView.invalidate()
 
+
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
@@ -89,7 +90,6 @@ class HomeFragment : androidx.fragment.app.Fragment() {
 
             notificationManager.createNotificationChannel(notificationChannel)
         }
-        // TODO: Step 1.6 END create channel
     }
 
     //allow send notif to multiple users
@@ -102,7 +102,6 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                     message = getString(R.string.message_subscribe_failed)
                 }
             }
-        // [END subscribe_topics]
     }
 
 

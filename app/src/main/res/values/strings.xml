@@ -21,7 +21,7 @@
     <string name="eggs_ready">Subscribed to topicxxxxxxxxxxxx</string>
     <string name="egg_notification_channel_name" translatable="true">Push message</string>
     <string name="egg_notification_channel_id">Subscribed to topic</string>
-    <string name="notification_title">Kanye Push</string>
+    <string name="notification_title"></string>
     <!--here-->
 
     <!-- Sleep quality strings -->
@@ -44,6 +44,22 @@
     <string name="hours_slept"><![CDATA[<b>Hours:Minutes:Seconds</b>]]></string>
 
     <string name="set_time">Set time: %1$s</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <string name="timer_key">timerKey</string>
 
 
 </resources>

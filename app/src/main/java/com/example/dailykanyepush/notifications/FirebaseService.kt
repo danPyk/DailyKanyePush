@@ -29,7 +29,9 @@ class FirebaseService : FirebaseMessagingService() {
         }
     }
     //TODO add coruting?
-    fun applyWork(txt: String?, userHours: Long) {
+    //enqueue work
+    fun applyWork(txt: String?, userHours: Int) {
+        var Int = 1.5
         val data = Data.Builder().putAll(mapOf(MessageWork.MESSAGE to txt)).build()
         val constraints: Constraints = Constraints.Builder().apply {
             setRequiredNetworkType(NetworkType.CONNECTED)
@@ -43,22 +45,24 @@ class FirebaseService : FirebaseMessagingService() {
         val workManager = WorkManager.getInstance(application)
         workManager.enqueue(request)
     }
+    //set delay of notification
+    private fun OneTimeWorkRequest.Builder.delay(userTimeSettings: Int): OneTimeWorkRequest.Builder {
+        var actualHour = Calendar.getInstance().get(Calendar.HOUR).times(60)
+        var actualMinute = Calendar.getInstance().get(Calendar.MINUTE)
 
-    private fun OneTimeWorkRequest.Builder.delay(userTimeSettings: Long): OneTimeWorkRequest.Builder {
-        val actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).toLong()
+        var sumOfActuaolHourAndMinute = actualHour+actualMinute
 
         val messageDelay = when {
-            actualHour < userTimeSettings -> userTimeSettings - actualHour
-            actualHour > userTimeSettings -> 24L - actualHour + userTimeSettings
+            sumOfActuaolHourAndMinute < userTimeSettings -> userTimeSettings - sumOfActuaolHourAndMinute
+            sumOfActuaolHourAndMinute > userTimeSettings -> 1440 - sumOfActuaolHourAndMinute + userTimeSettings
             else -> 0
         }
-        // return if (true) {
-        //  val testDelayInMinutes = delayInHours
+
         return setInitialDelay(
-            messageDelay,
+            messageDelay.toLong(),
             TimeUnit.MINUTES)
     }
-    fun getHourFromUser(): Long {
+    fun getHourFromUser(): Int {
         var userHourString =
             applicationContext.openFileInput("UserTimeSetting")?.bufferedReader()
                 ?.useLines { lines ->
@@ -66,7 +70,13 @@ class FirebaseService : FirebaseMessagingService() {
                         "$some\n$text"
                     }
                 }
-        var userHours = userHourString!!.trim().toLong()
+        var hour = userHourString?.substring(1, 3)?.toInt()
+        var hourMultiple = hour!!.times(60)
+        var minute = userHourString?.substring(3, 5)?.toInt()
+
+        var userHours = minute!!.plus(hourMultiple)
+
+
         return userHours
     }
     fun insertQuote(fileName: String, timSetByUser: String?) {
@@ -74,22 +84,13 @@ class FirebaseService : FirebaseMessagingService() {
             it.write(timSetByUser?.toByteArray())
         }
     }
+    //genereting new token after first launch
     override fun onNewToken(p0: String) {
         Log.d(TAG, "Refreshed token is $p0")
         sendRegistrationToServer(p0)
     }
 
-    /**
-     * Persist token to third-party servers.
-     * @param token The new token.
-     */
     private fun sendRegistrationToServer(token: String?) {
     }
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     * @param messageBody FCM message body received.
-     */
-
-
 
 }

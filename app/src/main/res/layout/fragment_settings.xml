@@ -50,14 +50,17 @@
         app:layout_constraintTop_toBottomOf="@+id/text_gallery" />
 
     <TimePicker
-        android:id="@+id/timePicker1"
+        android:id="@+id/timePicker"
+
         android:layout_width="380dp"
         android:layout_height="380dp"
         app:layout_constraintBottom_toTopOf="@+id/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.666" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
