@@ -2,7 +2,6 @@ package com.example.dailykanyepush.notifications
 
 import android.app.NotificationManager
 import android.content.Context
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -16,7 +15,6 @@ const val KEY_RESULT = "result"
      override fun doWork(): Result {
 
          return try{
-             Log.i(FirebaseService.TAG, "doWork: ")
 
              text = inputData.getString(MESSAGE)!!
 

@@ -2,6 +2,7 @@ package com.example.dailykanyepush.ui.home
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -39,21 +40,23 @@ class HomeFragment : androidx.fragment.app.Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val viewModelFactory = SleepTrackerViewModelFactory(application)
+        val viewModelFactory = HomeViewModelFactory(application)
 
         //ref to sleepTrackerViewModel
-        val sleepTrackerViewModel =
+        val homeViewModel =
             ViewModelProvider(
                 this, viewModelFactory
             ).get(HomeViewModel::class.java)
 
         binding.setLifecycleOwner(this)
+        binding.homeViewModel = homeViewModel
 
-        binding.sleepTrackerViewModel = sleepTrackerViewModel
-        binding.quoteTextView.text = sleepTrackerViewModel.getQuote()
+        binding.quoteTextView.text = homeViewModel.getQuote()
         binding.quoteTextView.invalidate()
 
-
+    /*    binding.quoteTextView.setOnClickListener{
+            shareSucces()
+        }*/
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
@@ -103,6 +106,18 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                 }
             }
     }
+
+    fun shareSucces(){
+        startActivity(getShareIntent())
+    }
+    fun getShareIntent(): Intent {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.setType( "text/plain")
+            .putExtra(Intent.EXTRA_TEXT, "getQuote()")
+
+        return  shareIntent
+    }
+
 
 
 }

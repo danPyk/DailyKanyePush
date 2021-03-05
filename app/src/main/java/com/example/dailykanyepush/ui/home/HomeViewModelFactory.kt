@@ -25,7 +25,7 @@ import androidx.lifecycle.ViewModelProvider
  *
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
-class SleepTrackerViewModelFactory(
+class HomeViewModelFactory(
         private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

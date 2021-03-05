@@ -1,3 +1,4 @@
+/*
 package com.example.dailykanyepush.notifications
 
 import android.content.Context
@@ -47,19 +48,19 @@ class FirebaseService : FirebaseMessagingService() {
     }
     //set delay of notification
     private fun OneTimeWorkRequest.Builder.delay(userTimeSettings: Int): OneTimeWorkRequest.Builder {
-        var actualHour = Calendar.getInstance().get(Calendar.HOUR).times(60)
+        var actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).times(60)
         var actualMinute = Calendar.getInstance().get(Calendar.MINUTE)
 
         var sumOfActuaolHourAndMinute = actualHour+actualMinute
 
-        val messageDelay = when {
+        var messageDelay = when {
             sumOfActuaolHourAndMinute < userTimeSettings -> userTimeSettings - sumOfActuaolHourAndMinute
             sumOfActuaolHourAndMinute > userTimeSettings -> 1440 - sumOfActuaolHourAndMinute + userTimeSettings
             else -> 0
         }
-
+        var messageDelayLong = messageDelay.toLong()
         return setInitialDelay(
-            messageDelay.toLong(),
+            messageDelayLong,
             TimeUnit.MINUTES)
     }
     fun getHourFromUser(): Int {
@@ -94,3 +95,4 @@ class FirebaseService : FirebaseMessagingService() {
     }
 
 }
+*/

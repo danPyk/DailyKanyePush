@@ -62,7 +62,7 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
 
             var fileName = "UserTimeSetting"
 
-            settingsViewModel.insert(fileName, sumTime)
+            settingsViewModel.insertTimeToFile(fileName, sumTime)
         }
 
         return binding.root

@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -43,16 +42,6 @@ class MainActivity : AppCompatActivity(){
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return NavigationUI.navigateUp(navController, drawerLayout)
-    }
-
-    interface IOnBackPressed {
-        fun onBackPressed(): Boolean
-    }
-    override fun onBackPressed() {
-        val fragment: Fragment? = supportFragmentManager.findFragmentById(android.R.id.main_container)
-        if (fragment !is IOnBackPressed || !(fragment as IOnBackPressed?)!!.onBackPressed()) {
-            super.onBackPressed()
-        }
     }
 
 

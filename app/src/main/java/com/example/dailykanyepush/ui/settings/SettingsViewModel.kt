@@ -3,8 +3,6 @@ package com.example.dailykanyepush.ui.settings
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.AndroidViewModel
-import com.example.dailykanyepush.R
-import com.google.firebase.messaging.FirebaseMessaging
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -16,11 +14,12 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     val text: LiveData<String> = _text*/
 
 
-    fun insert(fileName: String, timSetByUser: String) {
+    fun insertTimeToFile(fileName: String, timSetByUser: String) {
         context.openFileOutput(fileName, Context.MODE_PRIVATE).use {
             it.write(timSetByUser?.toByteArray())
         }
     }
+    //add 0 to hour/minute if it's single
     fun checkIfSingle(string: String): String{
         var copyString = string
         if(copyString.length == 1){
