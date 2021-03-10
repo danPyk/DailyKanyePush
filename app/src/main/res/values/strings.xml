@@ -33,7 +33,6 @@
     <string name="four_pretty_good">Pretty good</string>
     <string name="five_excellent">Excellent!</string>
     //TODO
-    <string name="tok">c01MUL8eTtmiwuOxKAw39Z:APA91bFAEUmeetqLpFGT-0_3-IpQHbn3-PiDVnC5hQmXP4v6Cvh8KiMTVW9pIKXDWPamqigyd3cIie3DlnYt06N9Gk0zfLZ9Uc0h1HK3KV56HlC-Rs3omybYzPWmG_kTtyvAmIg7EhJD!</string>
     <string name="timer_run">timerRunnnnn</string>
 
     <!-- Output to TextView styled with a little HTML -->

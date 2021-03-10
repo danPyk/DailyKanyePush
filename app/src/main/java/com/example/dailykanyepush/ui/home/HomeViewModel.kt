@@ -1,7 +1,9 @@
 package com.example.dailykanyepush.ui.home
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
+import java.io.File
 import java.io.FileNotFoundException
 import java.lang.reflect.InvocationTargetException
 
@@ -25,13 +27,20 @@ class HomeViewModel(application: Application) :
             var userHours = userHourString!!.trim()
 
             return userHours
-        }catch (e: InvocationTargetException ){
+        }catch (e: InvocationTargetException){
             return ""
-        }catch (e: RuntimeException ){
+        }catch (e: RuntimeException){
             return ""
         }
-        catch (e: FileNotFoundException ){
+        catch (e: FileNotFoundException){
             return ""
         }
     }
+/*    fun fileExists(context: Context, filename: String?): Boolean {
+        val file: File = context.getFileStreamPath(quote)
+        return if (file == null || !file.exists()) {
+            false
+        } else true
+    }*/
+
 }

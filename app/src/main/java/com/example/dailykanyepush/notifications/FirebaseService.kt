@@ -1,4 +1,3 @@
-/*
 package com.example.dailykanyepush.notifications
 
 import android.content.Context
@@ -95,4 +94,3 @@ class FirebaseService : FirebaseMessagingService() {
     }
 
 }
-*/

@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<style name="AppTheme" parent="AppBaseTheme">
-<!-- All customizations that are NOT specific to a particular API-level can go here. -->
+<!--<style name="AppTheme" parent="AppBaseTheme">
+&lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;
 <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
 </style>
 
-    <!-- Style to replace actionbar overflow icon. set item 'android:actionOverflowButtonStyle' in AppTheme -->
+    &lt;!&ndash; Style to replace actionbar overflow icon. set item 'android:actionOverflowButtonStyle' in AppTheme &ndash;&gt;
 <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
 <item name="android:src">@drawable/ic_launcher</item>
 <item name="android:background">?android:attr/actionBarItemBackground</item>
 <item name="android:contentDescription">"Lala"</item>
-</style>
+</style>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
