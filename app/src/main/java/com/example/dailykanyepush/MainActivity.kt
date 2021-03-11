@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(){
             this, R.layout.activity_main)
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        //context used to shared pref
 
         drawerLayout = binding.drawerLayout
         val navController = findNavController(R.id.nav_host_fragment)
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity(){
                 R.id.nav_home, R.id.nav_settings, R.id.nav_about
             ), drawerLayout
         )
-        NavigationUI.setupActionBarWithNavController(this,navController, drawerLayout)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
 
         NavigationUI.setupWithNavController(binding.navView, navController)
     }

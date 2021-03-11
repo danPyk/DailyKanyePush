@@ -14,8 +14,8 @@ class FirebaseService : FirebaseMessagingService() {
     companion object {
         const val TAG = "MyFirebaseMsgService"
     }
-    override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
         remoteMessage?.data?.let {
             val data = remoteMessage.data
             val myCustomKey = data["key"]
@@ -31,7 +31,7 @@ class FirebaseService : FirebaseMessagingService() {
     //TODO add coruting?
     //enqueue work
     fun applyWork(txt: String?, userHours: Int) {
-        var Int = 1.5
+
         val data = Data.Builder().putAll(mapOf(MessageWork.MESSAGE to txt)).build()
         val constraints: Constraints = Constraints.Builder().apply {
             setRequiredNetworkType(NetworkType.CONNECTED)
@@ -92,5 +92,7 @@ class FirebaseService : FirebaseMessagingService() {
 
     private fun sendRegistrationToServer(token: String?) {
     }
+
+
 
 }

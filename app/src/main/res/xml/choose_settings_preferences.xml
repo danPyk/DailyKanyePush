@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="@string/messages_header">
+    <PreferenceCategory app:title="@string/timer_notify_header">
 
         <Preference
             app:key="@string/timer_key"
@@ -10,14 +10,14 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/sync_header">
+    <PreferenceCategory >
 
         <SwitchPreferenceCompat
             android:id="@+id/notificationSwitch"
-            app:key="sync"
-            app:title="Enable message notifications"/>
-
-
+            app:key="@string/switch_key"
+            app:title="@string/enable_header"
+            android:defaultValue="true"
+            />
     </PreferenceCategory>
 
 </PreferenceScreen>

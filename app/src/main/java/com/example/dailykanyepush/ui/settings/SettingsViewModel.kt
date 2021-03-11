@@ -2,7 +2,11 @@ package com.example.dailykanyepush.ui.settings
 
 import android.app.Application
 import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.AndroidViewModel
+import java.io.FileNotFoundException
+import java.io.IOException
+import java.lang.reflect.InvocationTargetException
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -28,6 +32,31 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         return copyString
     }
     //allow send notif to multiple users
+    fun getTime(): String {
+        try{
+            var userHourString =
+
+                context.openFileInput("UserTimeSetting")?.bufferedReader()
+                    ?.useLines { lines ->
+                        lines.fold("") { some, text ->
+                            "$some\n$text"
+                        }
+                    }
+            var userHours = userHourString!!.trim()
+            var result = "Set time: "+userHours.substring(0, 2)+":"+userHours.substring(2, 4)
+
+            return result
+        }catch (e: InvocationTargetException){
+            return ""
+        }catch (e: IOException){
+            return ""
+        }
+        catch (e: FileNotFoundException){
+            return ""
+        }catch(e: SQLiteConstraintException){
+            return ""
+        }
+    }
 
 
 }

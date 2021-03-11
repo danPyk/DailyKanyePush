@@ -1,10 +1,11 @@
 package com.example.dailykanyepush.ui.home
 
 import android.app.Application
-import android.content.Context
+import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.AndroidViewModel
 import java.io.File
 import java.io.FileNotFoundException
+import java.io.IOException
 import java.lang.reflect.InvocationTargetException
 
 const val TAG = "HomeViewModel"
@@ -15,9 +16,9 @@ class HomeViewModel(application: Application) :
     private val context = getApplication<Application>().applicationContext
 
     fun getQuote(): String {
+
         try{
             var userHourString =
-
                 context.openFileInput("quote")?.bufferedReader()
                     ?.useLines { lines ->
                         lines.fold("") { some, text ->
@@ -28,13 +29,23 @@ class HomeViewModel(application: Application) :
 
             return userHours
         }catch (e: InvocationTargetException){
-            return ""
-        }catch (e: RuntimeException){
-            return ""
+            return "Here gonna be quote"
+        }catch (e: IOException){
+            return "Here gonna be quote"
         }
         catch (e: FileNotFoundException){
-            return ""
+            return "Here gonna be quote"
+        }catch(e: SQLiteConstraintException){
+            return "Here gonna be quote"
         }
+    }
+
+    fun fileExist() : Boolean{
+        val fileName = "quote"
+        var file = File(fileName)
+        var fileExists = file.exists()
+
+        return fileExists
     }
 /*    fun fileExists(context: Context, filename: String?): Boolean {
         val file: File = context.getFileStreamPath(quote)

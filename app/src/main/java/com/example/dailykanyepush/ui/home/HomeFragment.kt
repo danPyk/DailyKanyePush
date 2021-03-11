@@ -3,6 +3,7 @@ package com.example.dailykanyepush.ui.home
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.dailykanyepush.R
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.messaging.FirebaseMessaging
 
 
@@ -52,11 +54,13 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         binding.homeViewModel = homeViewModel
 
         binding.quoteTextView.text = homeViewModel.getQuote()
+
         binding.quoteTextView.invalidate()
 
-    /*    binding.quoteTextView.setOnClickListener{
-            shareSucces()
-        }*/
+        binding.button.setOnClickListener{
+            var quote = homeViewModel.getQuote()
+                 shareSucces(quote)
+            }
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
@@ -107,17 +111,24 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             }
     }
 
-    fun shareSucces(){
-        startActivity(getShareIntent())
-    }
-    fun getShareIntent(): Intent {
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.setType( "text/plain")
-            .putExtra(Intent.EXTRA_TEXT, "getQuote()")
+    fun shareSucces(quote: String) {
+        try{
 
-        return  shareIntent
+        startActivity(getShareIntent(quote))
+        }catch(e: SQLiteConstraintException){
+
+        }
     }
 
+    fun getShareIntent(quote: String): Intent {
 
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT,quote)
+            return shareIntent
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

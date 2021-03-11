@@ -20,11 +20,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-/**
- * This is pretty much boiler plate code for a ViewModel Factory.
- *
- * Provides the SleepDatabaseDao and context to the ViewModel.
- */
 class HomeViewModelFactory(
         private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
