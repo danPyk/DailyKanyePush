@@ -4,27 +4,36 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.PreferenceManager
 import com.example.dailykanyepush.R
 
-class ChooseSettingsFragment() : PreferenceFragmentCompat(),
+class Settings() : PreferenceFragmentCompat(),
     SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.choose_settings_preferences, rootKey)
+        setPreferencesFromResource(R.xml.settings_preferences, rootKey)
 
-        val preferenceFragment: Preference? = findPreference(getString(R.string.timer_key))
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val preferenceFragment: androidx.preference.Preference? = findPreference(getString(R.string.timer_key))
+ /*       val preferenceFragment2: androidx.preference.Preference? = findPreference(getString(R.string.switch_key))
+        val switch: SwitchPreferenceCompat? = findPreference(getString(R.string.switch_key))*/
+
+        val sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
+
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
-        preferenceFragment?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            view?.findNavController()?.navigate(R.id.nav_settings)
+        preferenceFragment?.onPreferenceClickListener = androidx.preference.Preference.OnPreferenceClickListener {
+            view?.findNavController()?.navigate(R.id.nav_timer)
 
             true
         }
+   /*     preferenceFragment2?.onPreferenceClickListener = androidx.preference.Preference.OnPreferenceClickListener {
+            //switch?.setSwitchTextOff(R.string.disable_header)
+            switch?.setSwitchTextOn(R.string.enable_header)
+
+            true
+        }*/
+
     }
 
     fun getPreference(): Boolean? {
@@ -51,8 +60,10 @@ class ChooseSettingsFragment() : PreferenceFragmentCompat(),
 
                 savePreference(R.string.switch_key, prefs)
             }
+
         }
     }
+
 
 
 }

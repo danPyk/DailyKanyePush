@@ -14,7 +14,7 @@ import com.example.dailykanyepush.R
 import com.example.dailykanyepush.databinding.FragmentSettingsBinding
 
 
-class SettingsFragment : androidx.fragment.app.Fragment() {
+class TimerFragment : androidx.fragment.app.Fragment() {
 
 
     private lateinit var settingsViewModel: SettingsViewModel
@@ -54,7 +54,6 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
             var minuteAffterCheck = settingsViewModel.checkIfSingle(settedTimeMinute)
 
             var sumTime = hourAffterCheck+minuteAffterCheck
-            //Todo: add pm/am
             binding.textview.text = getString(R.string.set_time,
                 "$hourAffterCheck:$minuteAffterCheck")
 
@@ -63,10 +62,9 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
             settingsViewModel.insertTimeToFile(fileName, sumTime)
         }
 
+
         return binding.root
     }
-
-
 
     private fun hideKeyboardInputInTimePicker(orientation: Int, timePicker: TimePicker)
     {
@@ -91,5 +89,6 @@ class SettingsFragment : androidx.fragment.app.Fragment() {
 
         }
     }
+
 
 }

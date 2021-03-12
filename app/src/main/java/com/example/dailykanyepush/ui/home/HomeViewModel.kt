@@ -25,6 +25,8 @@ class HomeViewModel(application: Application) :
                             "$some\n$text"
                         }
                     }
+            context.openFileInput("quote")?.close()
+
             var userHours = userHourString!!.trim()
 
             return userHours

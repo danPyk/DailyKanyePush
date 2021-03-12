@@ -16,6 +16,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name=".MainActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
 
@@ -23,12 +24,11 @@
         </activity>
 
 
-
         <service
             android:name=".notifications.FirebaseService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
         <!-- [START fcm_default_icon] -->

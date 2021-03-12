@@ -16,6 +16,7 @@
             android:id="@+id/notificationSwitch"
             app:key="@string/switch_key"
             app:title="@string/enable_header"
+
             android:defaultValue="true"
             />
     </PreferenceCategory>

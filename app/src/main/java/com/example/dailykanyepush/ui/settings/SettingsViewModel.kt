@@ -41,7 +41,10 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                         lines.fold("") { some, text ->
                             "$some\n$text"
                         }
+
                     }
+            context.openFileInput("UserTimeSetting")?.close()
+
             var userHours = userHourString!!.trim()
             var result = "Set time: "+userHours.substring(0, 2)+":"+userHours.substring(2, 4)
 

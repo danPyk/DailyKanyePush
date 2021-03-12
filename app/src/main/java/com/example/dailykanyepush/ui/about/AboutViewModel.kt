@@ -1,4 +1,4 @@
-package com.example.dailykanyepush.ui.slideshow
+package com.example.dailykanyepush.ui.about
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
