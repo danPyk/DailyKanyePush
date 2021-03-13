@@ -1,4 +1,4 @@
-package com.example.dailykanyepush.ui.about
+package com.example.kanyenotifications.ui.about
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.dailykanyepush.R
+import com.example.kanyenotifications.R
 
 
 class AboutFragment : Fragment() {

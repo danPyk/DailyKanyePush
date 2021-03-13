@@ -22,6 +22,7 @@
     <string name="egg_notification_channel_name" translatable="true">Push message</string>
     <string name="egg_notification_channel_id">Subscribed to topic</string>
     <string name="notification_title"></string>
+
     <!--here-->
 
     <!-- Sleep quality strings -->
@@ -47,6 +48,7 @@
     <string name="timer_notify_header">Notifications</string>
     <string name="enable_header">Turn off notifications</string>
     <string name="disable_header">Turn on notifications</string>
+    <string name="snackbar_message">This is your first app launch, set time of receiving notifications</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Set time</string>
@@ -61,12 +63,19 @@
 
     <string name="timer_key">timerKey</string>
     <string name="switch_key">switch</string>
-    <string name="quote">Here gonna be quote</string>
+    <string name="quote_key">Here gonna be quote</string>
 
-    <string name="description">Kanye Notification delivers you daily dose of Kanye West quotes.\n\n
-Notifications are send in push form, which mean that you will receive messages even if app is closed.\n\n
+    <string name="pref_previously_started">firstLaunchKey</string>
+    <string name="pref_first_see_timer">firstTimerKey</string>
+
+    <string name="description">
+        Kanye Notification delivers you daily dose of Kanye West quotes.\n\n
+You will receive messages even if app is closed.\n\n
 If you want to cancel receiving notifications go to settings tab.
 </string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="set_time_textview">Set time:</string>
 
 
 </resources>

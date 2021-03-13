@@ -18,4 +18,6 @@
     <style name="Theme.DailyKanyePush.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.DailyKanyePush.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
 </resources>

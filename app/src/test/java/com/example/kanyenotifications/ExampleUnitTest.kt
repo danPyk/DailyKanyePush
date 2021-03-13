@@ -1,4 +1,4 @@
-package com.example.dailykanyepush
+package com.example.kanyenotifications
 
 import org.junit.Test
 

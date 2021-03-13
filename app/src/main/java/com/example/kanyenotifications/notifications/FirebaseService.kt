@@ -1,4 +1,4 @@
-package com.example.dailykanyepush.notifications
+package com.example.kanyenotifications.notifications
 
 import android.content.Context
 import android.util.Log
@@ -16,7 +16,7 @@ class FirebaseService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        remoteMessage?.data?.let {
+        remoteMessage.data.let {
             val data = remoteMessage.data
             val myCustomKey = data["key"]
             val fileName = "quote"
@@ -25,12 +25,12 @@ class FirebaseService : FirebaseMessagingService() {
             applyWork(myCustomKey, getHourFromUser())
         }
         //while app is in foreground
-        remoteMessage?.notification?.let {
+        remoteMessage.notification?.let {
         }
     }
     //TODO add coruting?
     //enqueue work
-    fun applyWork(txt: String?, userHours: Int) {
+    private fun applyWork(txt: String?, userHours: Int) {
 
         val data = Data.Builder().putAll(mapOf(MessageWork.MESSAGE to txt)).build()
         val constraints: Constraints = Constraints.Builder().apply {
@@ -47,39 +47,37 @@ class FirebaseService : FirebaseMessagingService() {
     }
     //set delay of notification
     private fun OneTimeWorkRequest.Builder.delay(userTimeSettings: Int): OneTimeWorkRequest.Builder {
-        var actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).times(60)
-        var actualMinute = Calendar.getInstance().get(Calendar.MINUTE)
+        val actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).times(60)
+        val actualMinute = Calendar.getInstance().get(Calendar.MINUTE)
 
-        var sumOfActuaolHourAndMinute = actualHour+actualMinute
+        val sumOfActuaolHourAndMinute = actualHour+actualMinute
 
-        var messageDelay = when {
+        val messageDelay = when {
             sumOfActuaolHourAndMinute < userTimeSettings -> userTimeSettings - sumOfActuaolHourAndMinute
             sumOfActuaolHourAndMinute > userTimeSettings -> 1440 - sumOfActuaolHourAndMinute + userTimeSettings
             else -> 0
         }
-        var messageDelayLong = messageDelay.toLong()
+        val messageDelayLong = messageDelay.toLong()
         return setInitialDelay(
             messageDelayLong,
             TimeUnit.MINUTES)
     }
-    fun getHourFromUser(): Int {
-        var userHourString =
+    private fun getHourFromUser(): Int {
+        val userHourString =
             applicationContext.openFileInput("UserTimeSetting")?.bufferedReader()
                 ?.useLines { lines ->
                     lines.fold("") { some, text ->
                         "$some\n$text"
                     }
                 }
-        var hour = userHourString?.substring(1, 3)?.toInt()
-        var hourMultiple = hour!!.times(60)
-        var minute = userHourString?.substring(3, 5)?.toInt()
-
-        var userHours = minute!!.plus(hourMultiple)
+        val hour = userHourString?.substring(1, 3)?.toInt()
+        val hourMultiple = hour!!.times(60)
+        val minute = userHourString.substring(3, 5).toInt()
 
 
-        return userHours
+        return minute.plus(hourMultiple)
     }
-    fun insertQuote(fileName: String, timSetByUser: String?) {
+    private fun insertQuote(fileName: String, timSetByUser: String?) {
         this.openFileOutput(fileName, Context.MODE_PRIVATE).use {
             it.write(timSetByUser?.toByteArray())
         }

@@ -1,4 +1,4 @@
-package com.example.dailykanyepush.ui.home
+package com.example.kanyenotifications.ui.home
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,8 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.dailykanyepush.R
-import com.google.firebase.analytics.FirebaseAnalytics
+import com.example.kanyenotifications.R
 import com.google.firebase.messaging.FirebaseMessaging
 
 
@@ -26,16 +25,17 @@ import com.google.firebase.messaging.FirebaseMessaging
 //first deploy on phone, then thinking how to manage hours
 
 class HomeFragment : androidx.fragment.app.Fragment() {
-    private val TOPIC = "kanyepush"
+    //topic used to send notificaions
+    private val topic = "kanyepush"
 
-    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        val binding: com.example.dailykanyepush.databinding.FragmentHomeBinding =
+    ): View {
+
+        val binding: com.example.kanyenotifications.databinding.FragmentHomeBinding =
             DataBindingUtil.inflate(
                 inflater, R.layout.fragment_home, container, false
             )
@@ -43,24 +43,18 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         val application = requireNotNull(this.activity).application
 
         val viewModelFactory = HomeViewModelFactory(application)
-
-        //ref to sleepTrackerViewModel
         val homeViewModel =
             ViewModelProvider(
-                this, viewModelFactory
-            ).get(HomeViewModel::class.java)
-
-        binding.setLifecycleOwner(this)
+                this, viewModelFactory).get(HomeViewModel::class.java)
+        binding.lifecycleOwner = this
         binding.homeViewModel = homeViewModel
 
         binding.quoteTextView.text = homeViewModel.getQuote()
-
         binding.quoteTextView.invalidate()
-
-        binding.button.setOnClickListener{
-            var quote = homeViewModel.getQuote()
-                 shareSucces(quote)
-            }
+        binding.button.setOnClickListener {
+            val quote = homeViewModel.getQuote()
+            shareSucces(quote)
+        }
         createChannel(
             getString(R.string.egg_notification_channel_id),
             getString(R.string.egg_notification_channel_name)
@@ -71,16 +65,15 @@ class HomeFragment : androidx.fragment.app.Fragment() {
     }
 
     private fun createChannel(channelId: String, channelName: String) {
-        // TODO: Step 1.6 START create a channel
+        // create a channel
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
             val notificationChannel = NotificationChannel(
                 channelId,
                 channelName,
-                // TODO: Step 2.4 change importance
                 NotificationManager.IMPORTANCE_HIGH
             )
-                // TODO: Step 2.6 disable badges for this channel
+                //disable badges for this channel
                 .apply {
                     setShowBadge(false)
                 }
@@ -102,33 +95,31 @@ class HomeFragment : androidx.fragment.app.Fragment() {
     //allow send notif to multiple users
     private fun subscribeTopic() {
         // [START subscribe_topic]
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
-            .addOnCompleteListener { task ->
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
+            .addOnCompleteListener {/* task ->
                 var message = getString(R.string.message_subscribed)
                 if (!task.isSuccessful) {
                     message = getString(R.string.message_subscribe_failed)
-                }
+                }*/
             }
     }
 
-    fun shareSucces(quote: String) {
-        try{
+    private fun shareSucces(quote: String) {
+        try {
 
-        startActivity(getShareIntent(quote))
-        }catch(e: SQLiteConstraintException){
+            startActivity(getShareIntent(quote))
+        } catch (e: SQLiteConstraintException) {
 
         }
     }
 
-    fun getShareIntent(quote: String): Intent {
+    private fun getShareIntent(quote: String): Intent {
 
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT,quote)
-            return shareIntent
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.setType("text/plain")
+            .putExtra(Intent.EXTRA_TEXT, quote)
+        return shareIntent
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
+
 }

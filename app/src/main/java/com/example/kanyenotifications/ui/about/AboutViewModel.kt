@@ -1,4 +1,4 @@
-package com.example.dailykanyepush.ui.about
+package com.example.kanyenotifications.ui.about
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

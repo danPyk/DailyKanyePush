@@ -11,13 +11,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory >
-
+        <!--todo change txt after switch-->
         <SwitchPreferenceCompat
             android:id="@+id/notificationSwitch"
             app:key="@string/switch_key"
             app:title="@string/enable_header"
 
-            android:defaultValue="true"
+            android:defaultValue="false"
+            android:textOff="No"
+            android:textOn="Yes"
+            app:showText="true"
+
             />
     </PreferenceCategory>
 

@@ -1,24 +1,23 @@
-package com.example.dailykanyepush.ui.home
+package com.example.kanyenotifications.ui.home
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.AndroidViewModel
-import java.io.File
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.lang.reflect.InvocationTargetException
 
-const val TAG = "HomeViewModel"
-
 class HomeViewModel(application: Application) :
     AndroidViewModel(application) {
 
+    @SuppressLint("StaticFieldLeak")
     private val context = getApplication<Application>().applicationContext
 
     fun getQuote(): String {
 
-        try{
-            var userHourString =
+        try {
+            val userHourString =
                 context.openFileInput("quote")?.bufferedReader()
                     ?.useLines { lines ->
                         lines.fold("") { some, text ->
@@ -27,33 +26,18 @@ class HomeViewModel(application: Application) :
                     }
             context.openFileInput("quote")?.close()
 
-            var userHours = userHourString!!.trim()
+            val userHours = userHourString!!.trim()
 
             return userHours
-        }catch (e: InvocationTargetException){
+        } catch (e: InvocationTargetException) {
             return "Here gonna be quote"
-        }catch (e: IOException){
+        } catch (e: IOException) {
             return "Here gonna be quote"
-        }
-        catch (e: FileNotFoundException){
+        } catch (e: FileNotFoundException) {
             return "Here gonna be quote"
-        }catch(e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             return "Here gonna be quote"
         }
     }
-
-    fun fileExist() : Boolean{
-        val fileName = "quote"
-        var file = File(fileName)
-        var fileExists = file.exists()
-
-        return fileExists
-    }
-/*    fun fileExists(context: Context, filename: String?): Boolean {
-        val file: File = context.getFileStreamPath(quote)
-        return if (file == null || !file.exists()) {
-            false
-        } else true
-    }*/
 
 }

@@ -6,9 +6,14 @@
     tools:context=".ui.settings.TimerFragment">
     <data>
         <variable
-            name="settingsViewModel"
-            type="com.example.dailykanyepush.ui.settings.SettingsViewModel" />
+            name="timerViewModel"
+            type="com.example.kanyenotifications.ui.settings.TimerViewModel" />
     </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="Save"
+        android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -42,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="76dp"
-        android:text="Set time:"
+        android:text="@string/set_time_textview"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/btnDB"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,4 +70,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

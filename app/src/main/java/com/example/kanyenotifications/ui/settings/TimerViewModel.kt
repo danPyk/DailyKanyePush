@@ -1,5 +1,6 @@
-package com.example.dailykanyepush.ui.settings
+package com.example.kanyenotifications.ui.settings
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
@@ -8,8 +9,9 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.lang.reflect.InvocationTargetException
 
-class SettingsViewModel(application: Application) : AndroidViewModel(application) {
+class TimerViewModel(application: Application) : AndroidViewModel(application) {
 
+    @SuppressLint("StaticFieldLeak")
     private val context = getApplication<Application>().applicationContext
 
 /*    private val _text = MutableLiveData<String>().apply {
@@ -20,7 +22,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
     fun insertTimeToFile(fileName: String, timSetByUser: String) {
         context.openFileOutput(fileName, Context.MODE_PRIVATE).use {
-            it.write(timSetByUser?.toByteArray())
+            it.write(timSetByUser.toByteArray())
         }
     }
     //add 0 to hour/minute if it's single
@@ -34,7 +36,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     //allow send notif to multiple users
     fun getTime(): String {
         try{
-            var userHourString =
+            val userHourString =
 
                 context.openFileInput("UserTimeSetting")?.bufferedReader()
                     ?.useLines { lines ->
@@ -45,8 +47,8 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                     }
             context.openFileInput("UserTimeSetting")?.close()
 
-            var userHours = userHourString!!.trim()
-            var result = "Set time: "+userHours.substring(0, 2)+":"+userHours.substring(2, 4)
+            val userHours = userHourString!!.trim()
+            val result = "Set time: "+userHours.substring(0, 2)+":"+userHours.substring(2, 4)
 
             return result
         }catch (e: InvocationTargetException){

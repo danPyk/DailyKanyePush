@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "DailyKanyePush"
+rootProject.name = "Kanye Notifications"

@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package com.example.dailykanyepush.ui.home
+package com.example.kanyenotifications.ui.settings
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class HomeViewModelFactory(
+/**
+ * This is pretty much boiler plate code for a ViewModel Factory.
+ *
+ * Provides the SleepDatabaseDao and context to the ViewModel.
+ */
+class TimerViewModelFactory(
         private val application: Application) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
-            return HomeViewModel( application) as T
+        if (modelClass.isAssignableFrom(TimerViewModel::class.java)) {
+            return TimerViewModel( application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

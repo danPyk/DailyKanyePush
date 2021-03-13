@@ -8,8 +8,9 @@
 
         <variable
             name="homeViewModel"
-            type="com.example.dailykanyepush.ui.home.HomeViewModel" />
+            type="com.example.kanyenotifications.ui.home.HomeViewModel" />
     </data>
+    <!--coordinator layout for full snackbar functionality-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
 
             android:layout_marginBottom="16dp"
             android:fontFamily="@font/reg"
-            android:text="@string/quote"
+            android:text="@string/quote_key"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +40,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Share"
+            android:text="@string/share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
