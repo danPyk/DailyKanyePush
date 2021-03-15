@@ -10,7 +10,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.kanyenotifications.databinding.ActivityMainBinding
+<<<<<<< HEAD:app/src/main/java/com/example/kanyenotifications/MainActivity.kt
 
+=======
+>>>>>>> d3cc652 (beta version done 2 time):app/src/main/java/com/example/dailykanyepush/MainActivity.kt
 
 class MainActivity : AppCompatActivity() {
 
