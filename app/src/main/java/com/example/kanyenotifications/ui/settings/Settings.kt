@@ -16,11 +16,8 @@ class Settings : PreferenceFragmentCompat(),
         setPreferencesFromResource(R.xml.settings_preferences, rootKey)
 
         val preferenceFragment: androidx.preference.Preference? = findPreference(getString(R.string.timer_key))
-<<<<<<< HEAD:app/src/main/java/com/example/kanyenotifications/ui/settings/Settings.kt
        // val preferenceFragment2: androidx.preference.Preference? = findPreference(getString(R.string.switch_key))
-=======
         // val preferenceFragment2: androidx.preference.Preference? = findPreference(getString(R.string.switch_key))
->>>>>>> d3cc652 (beta version done 2 time):app/src/main/java/com/example/kanyenotifications/ui/Settings.kt
         val switch: SwitchPreferenceCompat? = findPreference(getString(R.string.switch_key))
 
         //todo understand it better
@@ -36,18 +33,6 @@ class Settings : PreferenceFragmentCompat(),
 
             true
         }
-<<<<<<< HEAD:app/src/main/java/com/example/kanyenotifications/ui/settings/Settings.kt
- /*       preferenceFragment2?.onPreferenceClickListener = androidx.preference.Preference.OnPreferenceClickListener {
-            switch?.setSwitchTextOff(R.string.disable_header)
-            switch?.setSwitchTextOn(R.string.enable_header)
-=======
-        /*       preferenceFragment2?.onPreferenceClickListener = androidx.preference.Preference.OnPreferenceClickListener {
-                   switch?.setSwitchTextOff(R.string.disable_header)
-                   switch?.setSwitchTextOn(R.string.enable_header)
->>>>>>> d3cc652 (beta version done 2 time):app/src/main/java/com/example/kanyenotifications/ui/Settings.kt
-
-                   true
-               }*/
 
     }
 
@@ -64,12 +49,7 @@ class Settings : PreferenceFragmentCompat(),
             apply()
         }
     }
-
-<<<<<<< HEAD:app/src/main/java/com/example/kanyenotifications/ui/settings/Settings.kt
-   //called when switch is switched
-=======
     //called when switch is switched
->>>>>>> d3cc652 (beta version done 2 time):app/src/main/java/com/example/kanyenotifications/ui/Settings.kt
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
         when (key) {
             "switch" -> {
@@ -81,7 +61,5 @@ class Settings : PreferenceFragmentCompat(),
 
         }
     }
-
-
 
 }

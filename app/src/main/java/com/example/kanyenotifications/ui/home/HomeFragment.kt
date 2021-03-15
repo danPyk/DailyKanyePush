@@ -16,14 +16,6 @@ import com.example.kanyenotifications.R
 import com.google.firebase.messaging.FirebaseMessaging
 
 
-//sys time, how to pass,
-
-//first page with info
-// report bug, buy bear, contact
-
-//delete one cart
-//first deploy on phone, then thinking how to manage hours
-
 class HomeFragment : androidx.fragment.app.Fragment() {
     //topic used to send notificaions
     private val topic = "kanyepush"
@@ -53,11 +45,9 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         binding.quoteTextView.invalidate()
         binding.button.setOnClickListener {
             val quote = homeViewModel.getQuote()
-<<<<<<< HEAD:app/src/main/java/com/example/kanyenotifications/ui/home/HomeFragment.kt
             shareSucces(quote)
-=======
+
              shareSucces(quote)
->>>>>>> d3cc652 (beta version done 2 time):app/src/main/java/com/example/dailykanyepush/ui/home/HomeFragment.kt
         }
         createChannel(
             getString(R.string.egg_notification_channel_id),

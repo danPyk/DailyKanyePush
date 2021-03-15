@@ -13,11 +13,7 @@
 
     <fragment
         android:id="@+id/nav_timer"
-<<<<<<< HEAD
         android:name="com.example.kanyenotifications.ui.settings.TimerFragment"
-=======
-        android:name="com.example.kanyenotifications.ui.settings.HomeFragment"
->>>>>>> d3cc652 (beta version done 2 time)
         android:label="Timer"
         tools:layout="@layout/fragment_timer" />
 
@@ -28,11 +24,7 @@
         tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/nav_settings"
-<<<<<<< HEAD
         android:name="com.example.kanyenotifications.ui.settings.Settings"
-=======
-        android:name="com.example.kanyenotifications.ui.Settings"
->>>>>>> d3cc652 (beta version done 2 time)
         android:label="Settings" />
 
 </navigation>
