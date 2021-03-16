@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "751320637447",
-    "project_id": "dailykanyepush",
-    "storage_bucket": "dailykanyepush.appspot.com"
+    "project_number": "154993479395",
+    "project_id": "kanyenotifications",
+    "storage_bucket": "kanyenotifications.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:751320637447:android:5d7f9a5f07c8a9ae704aa2",
+        "mobilesdk_app_id": "1:154993479395:android:6ae426053f2e0fa41f3fd6",
         "android_client_info": {
-          "package_name": "com.example.dailykanyepush"
+          "package_name": "com.beta.kanyenotifications"
         }
       },
       "oauth_client": [
         {
-          "client_id": "751320637447-jt6ee6qm4t8v9t7k135c7eiac79oeeku.apps.googleusercontent.com",
+          "client_id": "154993479395-v8uk8p5d2qrlnbicuib4rnjvek80bhri.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_7BDTTlI55Cj7m8T47eKzgS2OCrRoP7Y"
+          "current_key": "AIzaSyB3J-6eOQodXUBBWMn4EeZjeRvQiit7zDs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "751320637447-jt6ee6qm4t8v9t7k135c7eiac79oeeku.apps.googleusercontent.com",
+              "client_id": "154993479395-v8uk8p5d2qrlnbicuib4rnjvek80bhri.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
