@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DailyKanyePush</string>
+    <string name="app_name">Kanye Notifications</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -71,8 +71,8 @@
     <string name="description">
         Kanye Notification delivers you daily dose of Kanye West quotes.\n\n
 You will receive messages even if app is closed.\n\n
-If you want to cancel receiving notifications go to settings tab.
-</string>
+If you want to cancel receiving notifications go to settings tab.\n\n
+After setting time you might wait up to 24h new quotation.</string>
     <string name="share">Share</string>
     <string name="save">Save</string>
     <string name="set_time_textview">Set time:</string>

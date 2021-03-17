@@ -59,8 +59,8 @@ class FirebaseService : FirebaseMessagingService() {
         }
         val messageDelayLong = messageDelay.toLong()
         return setInitialDelay(
-            messageDelayLong,
-            TimeUnit.MINUTES)
+            10L,
+            TimeUnit.SECONDS)
     }
     private fun getHourFromUser(): Int {
         val userHourString =

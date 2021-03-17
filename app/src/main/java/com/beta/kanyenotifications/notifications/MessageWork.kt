@@ -49,12 +49,8 @@ class MessageWork(context: Context, workerParams: WorkerParameters) :
     private fun getPreference(): Boolean {
         val mPrefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
 
-        // val mPrefs = context.getSharedPreferences("switch", MODE_PRIVATE )
         val result = mPrefs.getBoolean("switch", false)
 
-        //  val sharedPref = mPrefs.getPreferences(applicationContext)
-        //   val highScore = sharedPref?.getBoolean(getString(R.string.switch_key), false)
-        //Toast.makeText(context, highScore.toString(), Toast.LENGTH_SHORT).show()
         return result
 
 

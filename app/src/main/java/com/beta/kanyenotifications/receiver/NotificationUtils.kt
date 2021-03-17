@@ -63,7 +63,6 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         //  add style to builder
         //.setStyle(bigPicStyle)
         .setStyle(bigTextStyle)
-
         .setLargeIcon(kanyeFace)
         //  Step 2.3 add snooze action
         .addAction(
