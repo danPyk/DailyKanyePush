@@ -7,7 +7,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.media.AudioAttributes
+import android.media.AudioManager
+import android.net.Uri
 import androidx.core.app.NotificationCompat
+import com.beta.kanyenotifications.BuildConfig
 import com.beta.kanyenotifications.MainActivity
 import com.beta.kanyenotifications.R
 
@@ -51,12 +55,11 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     val builder = NotificationCompat.Builder(
         applicationContext,
         // use the new 'breakfast' notification channel
-        applicationContext.getString(R.string.egg_notification_channel_id)
+        applicationContext.getString(R.string.notification_channel_id)
     )
         //  set title, text and icon to builder
         .setSmallIcon(R.drawable.kanye2)
         .setContentTitle(applicationContext.getString(R.string.notification_title))
-
         .setContentText(messageBody)
         //  set content intent
         .setContentIntent(contentPendingIntent)

@@ -5,12 +5,20 @@
 
         <Preference
             app:key="@string/timer_key"
-            app:title="@string/signature_title"
+            app:title="@string/signature_title_timer"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
+    <PreferenceCategory  app:title="@string/details_notify_header">
 
-    <PreferenceCategory >
+    <Preference
+        app:key="@string/details_key"
+        app:title="@string/details_title_details"
+        app:useSimpleSummaryProvider="true" />
+
+</PreferenceCategory>
+
+    <PreferenceCategory  >
         <!--todo change txt after switch-->
         <SwitchPreferenceCompat
             android:id="@+id/notificationSwitch"
@@ -24,5 +32,21 @@
 
             />
     </PreferenceCategory>
+
+<PreferenceCategory></PreferenceCategory>
+
+    <!--    <PreferenceCategory >
+            <SwitchPreferenceCompat
+                android:id="@+id/soundSwitch"
+                app:key="@string/sound_key"
+                app:title="@string/sound_header"
+
+                android:defaultValue="false"
+                android:textOff="No"
+                android:textOn="Yes"
+                app:showText="true"
+
+                />
+        </PreferenceCategory>-->
 
 </PreferenceScreen>

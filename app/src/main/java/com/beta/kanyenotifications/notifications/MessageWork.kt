@@ -21,7 +21,8 @@ class MessageWork(context: Context, workerParams: WorkerParameters) :
             text = inputData.getString(MESSAGE)!!
 
             val preferences = getPreference()
-            Log.e(FirebaseService.TAG, "applyWork: $preferences")
+
+
 
             if (!preferences) {
                 val notificationManager =

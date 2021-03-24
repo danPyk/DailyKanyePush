@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_main)
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        firstLaunch()
 
         //  val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinatorLayout)
         setSupportActionBar(toolbar)
@@ -39,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
 
-        firstLaunch()
 
     }
 

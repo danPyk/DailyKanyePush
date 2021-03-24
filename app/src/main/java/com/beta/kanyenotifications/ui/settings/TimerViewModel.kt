@@ -23,6 +23,7 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
     fun insertTimeToFile(fileName: String, timSetByUser: String) {
         context.openFileOutput(fileName, Context.MODE_PRIVATE).use {
             it.write(timSetByUser.toByteArray())
+
         }
     }
     //add 0 to hour/minute if it's single
@@ -45,9 +46,9 @@ class TimerViewModel(application: Application) : AndroidViewModel(application) {
                         }
 
                     }
-            context.openFileInput("UserTimeSetting")?.close()
 
             val userHours = userHourString!!.trim()
+            context.openFileInput("UserTimeSetting")?.close()
             val result = "Set time: "+userHours.substring(0, 2)+":"+userHours.substring(2, 4)
 
             return result

@@ -142,7 +142,7 @@ class TimerFragment : androidx.fragment.app.Fragment() {
             Snackbar.make(
                 coordinatorLayout,
                 R.string.snackbar_message,
-                4000
+                2500
             ).show()
         } catch (e: NullPointerException) {
 

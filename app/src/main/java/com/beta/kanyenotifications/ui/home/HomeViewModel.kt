@@ -24,9 +24,9 @@ class HomeViewModel(application: Application) :
                             "$some\n$text"
                         }
                     }
-            context.openFileInput("quote")?.close()
 
             val userHours = userHourString!!.trim()
+            context.openFileInput("quote")?.close()
 
             return userHours
         } catch (e: InvocationTargetException) {

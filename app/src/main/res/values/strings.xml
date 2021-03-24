@@ -14,14 +14,13 @@
     <string name="breakfast_notification_channel_id" translatable="false">fcm_default_channel</string>
 
     <string name="breakfast_notification_channel_name" translatable="true">Breakfast</string>
-    <string name="breakfast_notification_channel_description">Breakfast reminder</string>
     <string name="message_subscribe_failed">Failed to subscribe to topicxx</string>
     <string name="message_subscribed">Subscribed to topi</string>
 
     <string name="eggs_ready">Subscribed to topicxxxxxxxxxxxx</string>
-    <string name="egg_notification_channel_name" translatable="true">Push message</string>
-    <string name="egg_notification_channel_id">Subscribed to topic</string>
-    <string name="notification_title"></string>
+    <string name="notification_channel_name" translatable="true">Push message</string>
+    <string name="notification_channel_id">Subscribed to topic</string>
+    <string name="notification_title">Today\'s quote:</string>
 
     <!--here-->
 
@@ -45,13 +44,19 @@
 
     <string name="set_time">Set time: %1$s</string>
     <!-- Preference Titles -->
-    <string name="timer_notify_header">Notifications</string>
+    <string name="timer_notify_header">Timer </string>
+
+    <string name="details_notify_header">Details</string>
+
     <string name="enable_header">Turn off notifications</string>
+    <string name="sound_header">Turn off custom sound</string>
+
     <string name="disable_header">Turn on notifications</string>
     <string name="snackbar_message">This is your first app launch, set time of receiving notifications</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Set time</string>
+    <string name="signature_title_timer">Set time</string>
+    <string name="details_title_details">Customize notifications </string>
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
@@ -62,17 +67,20 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
     <string name="timer_key">timerKey</string>
+    <string name="details_key">detailsKey</string>
     <string name="switch_key">switch</string>
+    <string name="sound_key">sound</string>
+
     <string name="quote_key">Here gonna be quote</string>
 
     <string name="pref_previously_started">firstLaunchKey</string>
     <string name="pref_first_see_timer">firstTimerKey</string>
 
     <string name="description">
-        Kanye Notification delivers you daily dose of Kanye West quotes.\n\n
+        Kanye Notifications delivers you daily dose of Kanye West quotes.\n\n
 You will receive messages even if app is closed.\n\n
 If you want to cancel receiving notifications go to settings tab.\n\n
-After setting time you might wait up to 24h new quotation.</string>
+After setting time you might wait up to 24h for new quotation.</string>
     <string name="share">Share</string>
     <string name="save">Save</string>
     <string name="set_time_textview">Set time:</string>

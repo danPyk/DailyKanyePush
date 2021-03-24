@@ -2,6 +2,7 @@ package com.beta.kanyenotifications.ui.home
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
@@ -9,6 +10,7 @@ import android.media.AudioAttributes
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.beta.kanyenotifications.BuildConfig
 import com.beta.kanyenotifications.R
+import com.beta.kanyenotifications.notifications.FirebaseService.Companion.TAG
 import com.google.firebase.messaging.FirebaseMessaging
+import java.util.stream.IntStream
+import kotlin.random.Random
 
 
 class HomeFragment : androidx.fragment.app.Fragment() {
@@ -53,15 +58,17 @@ class HomeFragment : androidx.fragment.app.Fragment() {
              shareSucces(quote)
         }
         createChannel(
-            getString(R.string.egg_notification_channel_id),
-            getString(R.string.egg_notification_channel_name)
+          getString(R.string.notification_channel_id),
+       //   pickString(),
+
+            getString(R.string.notification_channel_name)
         )
         subscribeTopic()
 
         return binding.root
     }
 
-    private fun createChannel(channelId: String, channelName: String) {
+     private fun createChannel(channelId: String, channelName: String) {
 
 
         // create a channel
@@ -76,28 +83,38 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                 .apply {
                     setShowBadge(false)
                 }
+            //custom sound
             val att = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
                 .build()
-
-            //val uri: Uri = Uri.parse(R.raw.aotl)
             val uri = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID
-                 + "/" + R.raw.aotl)
+                 + "/" + R.raw.homecoming)
 
-
-            notificationChannel.setSound(uri, att)
+            val preference = getPreference()
+            if(!preference!!){
+                notificationChannel.setSound(uri, att)
+            }
+          //  Log.i(TAG, "createChannel: $preference")
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = Color.RED
             notificationChannel.enableVibration(true)
-            notificationChannel.description =
-                getString(R.string.breakfast_notification_channel_description)
+/*            notificationChannel.description =
+                getString(R.string.breakfast_notification_channel_description)*/
             val notificationManager = requireActivity().getSystemService(
                 NotificationManager::class.java
             )
 
             notificationManager.createNotificationChannel(notificationChannel)
         }
+    }
+    private fun pickString(): String{
+        val source = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+       val result = java.util.Random().ints(10, 0, source.length)
+           .toArray()
+            .map(source::get)
+            .joinToString("")
+        return result
     }
 
     //allow send notif to multiple users
@@ -128,6 +145,14 @@ class HomeFragment : androidx.fragment.app.Fragment() {
             .putExtra(Intent.EXTRA_TEXT, quote)
         return shareIntent
     }
+    private fun getPreference(): Boolean? {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+        return sharedPref?.getBoolean(getString(R.string.sound_key), false)
+
+    }
 
 
 }
+
+
+
