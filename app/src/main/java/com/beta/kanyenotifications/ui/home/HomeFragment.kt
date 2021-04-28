@@ -10,7 +10,6 @@ import android.media.AudioAttributes
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,15 +17,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.beta.kanyenotifications.BuildConfig
 import com.beta.kanyenotifications.R
-import com.beta.kanyenotifications.notifications.FirebaseService.Companion.TAG
 import com.google.firebase.messaging.FirebaseMessaging
-import java.util.stream.IntStream
-import kotlin.random.Random
 
 
 class HomeFragment : androidx.fragment.app.Fragment() {
     //topic used to send notificaions
-    private val topic = "kanyepush"
+    private val topic = "kanyepushh"
 
 
     override fun onCreateView(
@@ -49,6 +45,8 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         binding.lifecycleOwner = this
         binding.homeViewModel = homeViewModel
 
+
+
         binding.quoteTextView.text = homeViewModel.getQuote()
         binding.quoteTextView.invalidate()
         binding.button.setOnClickListener {
@@ -58,8 +56,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
              shareSucces(quote)
         }
         createChannel(
-          getString(R.string.notification_channel_id),
-       //   pickString(),
+            getString(R.string.notification_channel_id),
 
             getString(R.string.notification_channel_name)
         )
@@ -89,7 +86,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
                 .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
                 .build()
             val uri = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID
-                 + "/" + R.raw.homecoming)
+                    + "/" + R.raw.homecoming)
 
             val preference = getPreference()
             if(!preference!!){
@@ -107,14 +104,6 @@ class HomeFragment : androidx.fragment.app.Fragment() {
 
             notificationManager.createNotificationChannel(notificationChannel)
         }
-    }
-    private fun pickString(): String{
-        val source = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-       val result = java.util.Random().ints(10, 0, source.length)
-           .toArray()
-            .map(source::get)
-            .joinToString("")
-        return result
     }
 
     //allow send notif to multiple users
@@ -150,6 +139,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         return sharedPref?.getBoolean(getString(R.string.sound_key), false)
 
     }
+
 
 
 }

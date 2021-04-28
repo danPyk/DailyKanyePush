@@ -47,7 +47,10 @@ class TimerFragment : androidx.fragment.app.Fragment() {
             ViewModelProvider(
                 this, timerViewModelFactory
             ).get(TimerViewModel::class.java)
-        binding.setLifecycleOwner(this)
+
+        //val coordinatorLayout = binding.coordinatorLayout
+
+        binding.lifecycleOwner = this
         binding.timerViewModel = timerViewModel
 
         binding.timePicker.setIs24HourView(true)
@@ -56,13 +59,13 @@ class TimerFragment : androidx.fragment.app.Fragment() {
         binding.textview.text = timerViewModel.getTime()
         binding.btnDB.setOnClickListener{
 
-            var settedTimeHour = binding.timePicker.hour.toString()
-            var hourAffterCheck = timerViewModel.checkIfSingle(settedTimeHour)
+            val settedTimeHour = binding.timePicker.hour.toString()
+            val hourAffterCheck = timerViewModel.checkIfSingle(settedTimeHour)
 
-            var settedTimeMinute = binding.timePicker.minute.toString()
-            var minuteAffterCheck = timerViewModel.checkIfSingle(settedTimeMinute)
+            val settedTimeMinute = binding.timePicker.minute.toString()
+            val minuteAffterCheck = timerViewModel.checkIfSingle(settedTimeMinute)
 
-            var sumTime = hourAffterCheck+minuteAffterCheck
+            val sumTime = hourAffterCheck+minuteAffterCheck
             binding.textview.text = getString(R.string.set_time,
                 "$hourAffterCheck:$minuteAffterCheck")
 
@@ -117,13 +120,13 @@ class TimerFragment : androidx.fragment.app.Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, true) {
             val fileExist = fileExist()
             if (fileExist!!) {
-                findNavController().navigate(R.id.nav_settings)
+               findNavController().navigateUp()
             } else {
                 Toast.makeText(context, "You need to save time first", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
+    //if it is first launch, show pop up
     private fun firstLaunch() {
         val prefs: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
         val previouslyStarted = prefs.getBoolean(getString(R.string.pref_first_see_timer), false)

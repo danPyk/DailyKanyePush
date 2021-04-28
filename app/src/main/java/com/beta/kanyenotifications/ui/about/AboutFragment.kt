@@ -24,4 +24,7 @@ class AboutFragment : Fragment() {
 
         return root
     }
+
+
+
 }

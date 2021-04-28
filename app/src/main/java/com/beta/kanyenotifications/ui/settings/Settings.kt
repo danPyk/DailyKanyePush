@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.provider.Settings
 import android.provider.Settings.*
 import androidx.navigation.findNavController
 import androidx.preference.PreferenceFragmentCompat
@@ -19,13 +18,12 @@ class Settings : PreferenceFragmentCompat(),
         val preferenceFragment: androidx.preference.Preference? = findPreference(getString(R.string.timer_key))
         val preferenceFragment2: androidx.preference.Preference? = findPreference(getString(R.string.details_key))
 
-        //todo understand it better
         val sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context)
         sharedPreferences.registerOnSharedPreferenceChangeListener(this)
 
 
         preferenceFragment?.onPreferenceClickListener = androidx.preference.Preference.OnPreferenceClickListener {
-            view?.findNavController()?.navigate(R.id.nav_timer)
+            view?.findNavController()?.navigate(R.id.action_nav_settings_to_nav_timer)
 
             true
         }
@@ -67,6 +65,7 @@ class Settings : PreferenceFragmentCompat(),
 */
         }
     }
+    //notofications details
     private fun notificationDetails(){
         val intent =
             Intent(ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {

@@ -1,6 +1,5 @@
 package com.beta.kanyenotifications.notifications
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import androidx.work.*
@@ -23,7 +22,7 @@ class FirebaseService : FirebaseMessagingService() {
             val fileName = "quote"
 
             insertQuote(fileName, myCustomKey)
-            var fileExist = fileExist()
+            val fileExist = fileExist()
             if(fileExist==true) {
                 applyWork(myCustomKey, getHourFromUser())
             }
@@ -33,7 +32,6 @@ class FirebaseService : FirebaseMessagingService() {
         remoteMessage.notification?.let {
         }
     }
-    //TODO add coruting?
     //enqueue work
     private fun applyWork(txt: String?, userHours: Int) {
 
@@ -50,7 +48,6 @@ class FirebaseService : FirebaseMessagingService() {
         val workManager = WorkManager.getInstance(application)
         workManager.enqueue(request)
     }
-    //todo change hour
     //set delay of notification
     private fun OneTimeWorkRequest.Builder.delay(userTimeSettings: Int): OneTimeWorkRequest.Builder {
         val actualHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY).times(60)
@@ -65,10 +62,10 @@ class FirebaseService : FirebaseMessagingService() {
         }
         val messageDelayLong = messageDelay.toLong()
         return setInitialDelay(
-            10L,
-            TimeUnit.SECONDS)
+            messageDelayLong,
+            TimeUnit.MINUTES)
     }
-     fun fileExist(): Boolean? {
+     private fun fileExist(): Boolean? {
         return application.getFileStreamPath("UserTimeSetting")?.exists()
     }
     private fun getHourFromUser(): Int {

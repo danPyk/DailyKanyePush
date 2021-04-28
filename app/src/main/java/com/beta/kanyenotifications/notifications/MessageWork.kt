@@ -2,7 +2,6 @@ package com.beta.kanyenotifications.notifications
 
 import android.app.NotificationManager
 import android.content.Context
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
 import androidx.work.Worker

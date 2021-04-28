@@ -15,7 +15,11 @@
         android:id="@+id/nav_timer"
         android:name="com.beta.kanyenotifications.ui.settings.TimerFragment"
         android:label="Timer"
-        tools:layout="@layout/fragment_timer" />
+        tools:layout="@layout/fragment_timer" >
+        <action
+            android:id="@+id/action_nav_timer_to_nav_settings"
+            app:destination="@id/nav_settings" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_about"
@@ -25,6 +29,10 @@
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.beta.kanyenotifications.ui.settings.Settings"
-        android:label="Settings" />
+        android:label="Settings" >
+        <action
+            android:id="@+id/action_nav_settings_to_nav_timer"
+            app:destination="@id/nav_timer" />
+    </fragment>
 
 </navigation>

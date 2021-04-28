@@ -7,11 +7,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.media.AudioAttributes
-import android.media.AudioManager
-import android.net.Uri
 import androidx.core.app.NotificationCompat
-import com.beta.kanyenotifications.BuildConfig
 import com.beta.kanyenotifications.MainActivity
 import com.beta.kanyenotifications.R
 
