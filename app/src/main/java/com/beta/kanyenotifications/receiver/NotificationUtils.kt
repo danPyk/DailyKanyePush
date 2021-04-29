@@ -37,6 +37,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
         PendingIntent.FLAG_UPDATE_CURRENT
     )
     //add style
+    //todo chcek if
     val kanyeFace = BitmapFactory.decodeResource(
         applicationContext.resources,
         R.drawable.kanye_face

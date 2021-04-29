@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
@@ -27,6 +26,8 @@ class TimerFragment : androidx.fragment.app.Fragment() {
 
 
     private lateinit var timerViewModel: TimerViewModel
+    private var _binding: FragmentTimerBinding? = null
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,11 +36,7 @@ class TimerFragment : androidx.fragment.app.Fragment() {
     ): View? {
         timerViewModel =
                 ViewModelProvider(this).get(TimerViewModel::class.java)
-        val binding: FragmentTimerBinding = DataBindingUtil.inflate(inflater,
-            R.layout.fragment_timer,
-            container,
-            false)
-
+        _binding = FragmentTimerBinding.inflate(inflater, container, false)
         val application = requireNotNull(this.activity).application
         val timerViewModelFactory = TimerViewModelFactory(application)
 
@@ -48,25 +45,25 @@ class TimerFragment : androidx.fragment.app.Fragment() {
                 this, timerViewModelFactory
             ).get(TimerViewModel::class.java)
 
-        //val coordinatorLayout = binding.coordinatorLayout
 
-        binding.lifecycleOwner = this
-        binding.timerViewModel = timerViewModel
+        _binding?.lifecycleOwner = this
+        _binding?.timerViewModel = timerViewModel
 
-        binding.timePicker.setIs24HourView(true)
-        hideKeyboardInputInTimePicker(this.resources.configuration.orientation, binding.timePicker)
+        _binding?.timePicker?.setIs24HourView(true)
+        binding?.let { hideKeyboardInputInTimePicker(this.resources.configuration.orientation, it.timePicker) }
 
-        binding.textview.text = timerViewModel.getTime()
-        binding.btnDB.setOnClickListener{
+        _binding?.textview?.text = timerViewModel.getTime()
+        //todo add popup which came from sky when time is set
+        _binding?.btnDB?.setOnClickListener{
 
-            val settedTimeHour = binding.timePicker.hour.toString()
+            val settedTimeHour = _binding?.timePicker?.hour.toString()
             val hourAffterCheck = timerViewModel.checkIfSingle(settedTimeHour)
 
-            val settedTimeMinute = binding.timePicker.minute.toString()
+            val settedTimeMinute = _binding?.timePicker?.minute.toString()
             val minuteAffterCheck = timerViewModel.checkIfSingle(settedTimeMinute)
 
             val sumTime = hourAffterCheck+minuteAffterCheck
-            binding.textview.text = getString(R.string.set_time,
+            _binding?.textview?.text = getString(R.string.set_time,
                 "$hourAffterCheck:$minuteAffterCheck")
 
             val fileName = "UserTimeSetting"
@@ -74,8 +71,7 @@ class TimerFragment : androidx.fragment.app.Fragment() {
             timerViewModel.insertTimeToFile(fileName, sumTime)
         }
 
-
-        return binding.root
+        return binding?.root
     }
 
     //set pop up
@@ -153,4 +149,9 @@ class TimerFragment : androidx.fragment.app.Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+
+    }
 }

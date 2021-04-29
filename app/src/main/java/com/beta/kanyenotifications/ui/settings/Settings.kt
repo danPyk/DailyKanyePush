@@ -55,14 +55,6 @@ class Settings : PreferenceFragmentCompat(),
 
                 savePreference(R.string.switch_key, prefs)
             }
-        /*    "sound" -> {
-
-                var prefs = getPreference()
-                prefs = prefs?.not()
-
-                savePreference(R.string.sound_key, prefs)
-            }
-*/
         }
     }
     //notofications details

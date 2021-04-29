@@ -77,6 +77,7 @@
     <string name="pref_first_see_timer">firstTimerKey</string>
 
     <string name="description">
+        \n
         Kanye Notifications delivers you daily dose of Kanye West quotes.\n\n
 You will receive messages even if app is closed.\n\n
 If you want to cancel receiving notifications go to settings tab.\n\n
@@ -84,6 +85,8 @@ After setting time you might wait up to 24h for new quotation.</string>
     <string name="share">Share</string>
     <string name="save">Save</string>
     <string name="set_time_textview">Set time:</string>
+    <string name="email">dan.pykalo@gmail.com</string>
+    <string name="contact_description">Spot a bug or want say somth? Email me.</string>
 
 
 </resources>

@@ -1,6 +1,5 @@
 package com.beta.kanyenotifications.ui.home
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.database.sqlite.SQLiteConstraintException
 import androidx.lifecycle.AndroidViewModel
@@ -11,8 +10,8 @@ import java.lang.reflect.InvocationTargetException
 class HomeViewModel(application: Application) :
     AndroidViewModel(application) {
 
-    @SuppressLint("StaticFieldLeak")
-    private val context = getApplication<Application>().applicationContext
+    private val context = application
+
 
     fun getQuote(): String {
 

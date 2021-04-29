@@ -14,21 +14,23 @@ import com.beta.kanyenotifications.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var drawerLayout: DrawerLayout
+    private  var appBarConfiguration: AppBarConfiguration? = null
+    private var drawerLayout: DrawerLayout? = null
+    private var _binding: ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+        _binding = DataBindingUtil.setContentView(
             this, R.layout.activity_main)
+
         val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        //Debug.dumpHprofData("/data/data/com.beta.kanyenotifications/files/quote")
         firstLaunch()
 
-        //  val coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinatorLayout)
         setSupportActionBar(toolbar)
         //context used to shared pref
 
-        drawerLayout = binding.drawerLayout
+        drawerLayout = _binding?.drawerLayout
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -38,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             ), drawerLayout
         )
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
-        NavigationUI.setupWithNavController(binding.navView, navController)
+        NavigationUI.setupWithNavController(_binding!!.navView, navController)
 
 
     }
@@ -90,5 +92,11 @@ class MainActivity : AppCompatActivity() {
         return file.exists()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        drawerLayout = null
+        appBarConfiguration = null
+        _binding = null
+    }
 
 }

@@ -1,6 +1,5 @@
 package com.beta.kanyenotifications.ui.settings
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.database.sqlite.SQLiteConstraintException
@@ -11,8 +10,8 @@ import java.lang.reflect.InvocationTargetException
 
 class TimerViewModel(application: Application) : AndroidViewModel(application) {
 
-    @SuppressLint("StaticFieldLeak")
-    private val context = getApplication<Application>().applicationContext
+
+    private val context = application
 
 /*    private val _text = MutableLiveData<String>().apply {
         value = "This is gallery Fragment"

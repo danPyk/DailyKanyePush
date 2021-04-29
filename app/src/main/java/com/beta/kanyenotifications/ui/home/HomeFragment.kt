@@ -13,16 +13,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.beta.kanyenotifications.BuildConfig
 import com.beta.kanyenotifications.R
+import com.beta.kanyenotifications.databinding.FragmentHomeBinding
 import com.google.firebase.messaging.FirebaseMessaging
 
 
 class HomeFragment : androidx.fragment.app.Fragment() {
     //topic used to send notificaions
     private val topic = "kanyepushh"
+    private  var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding
 
 
     override fun onCreateView(
@@ -30,11 +32,8 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
-        val binding: com.beta.kanyenotifications.databinding.FragmentHomeBinding =
-            DataBindingUtil.inflate(
-                inflater, R.layout.fragment_home, container, false
-            )
+         _binding =
+             FragmentHomeBinding.inflate(inflater, container, false)
 
         val application = requireNotNull(this.activity).application
 
@@ -42,18 +41,17 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         val homeViewModel =
             ViewModelProvider(
                 this, viewModelFactory).get(HomeViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.homeViewModel = homeViewModel
+        //why where i chane this to just binding i dont have error? its a val
+        _binding?.lifecycleOwner = this
+        _binding?.homeViewModel = homeViewModel
 
 
-
-        binding.quoteTextView.text = homeViewModel.getQuote()
-        binding.quoteTextView.invalidate()
-        binding.button.setOnClickListener {
+        _binding?.quoteTextView?.text = homeViewModel.getQuote()
+        _binding?.quoteTextView?.invalidate()
+        _binding?.button?.setOnClickListener {
             val quote = homeViewModel.getQuote()
             shareSucces(quote)
 
-             shareSucces(quote)
         }
         createChannel(
             getString(R.string.notification_channel_id),
@@ -62,7 +60,12 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         )
         subscribeTopic()
 
-        return binding.root
+/*        AppWatcher.objectWatcher.expectWeaklyReachable(binding.quoteTextView, "View was detached")
+        AppWatcher.objectWatcher.expectWeaklyReachable(binding.button, "View was detached")
+        AppWatcher.objectWatcher.expectWeaklyReachable( application, "View was detached")*/
+
+        val view = binding?.root
+        return view!!
     }
 
      private fun createChannel(channelId: String, channelName: String) {
@@ -140,7 +143,18 @@ class HomeFragment : androidx.fragment.app.Fragment() {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
+/*    override fun onDestroy() {
+        super.onDestroy()
+        _binding?.let { AppWatcher.objectWatcher.expectWeaklyReachable(it, "View was detached") }
+        AppWatcher.objectWatcher.watch(androidx.constraintlayout.widget.ConstraintLayout(requireContext()), "View was detached")
+
+
+    }*/
 
 }
 
