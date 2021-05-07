@@ -2,9 +2,9 @@ package com.beta.kanyenotifications.ui.home
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.database.sqlite.SQLiteConstraintException
 import android.graphics.Color
 import android.media.AudioAttributes
 import android.net.Uri
@@ -125,7 +125,7 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         try {
 
             startActivity(getShareIntent(quote))
-        } catch (e: SQLiteConstraintException) {
+        } catch (e: ActivityNotFoundException) {
 
         }
     }
@@ -148,13 +148,6 @@ class HomeFragment : androidx.fragment.app.Fragment() {
         _binding = null
     }
 
-/*    override fun onDestroy() {
-        super.onDestroy()
-        _binding?.let { AppWatcher.objectWatcher.expectWeaklyReachable(it, "View was detached") }
-        AppWatcher.objectWatcher.watch(androidx.constraintlayout.widget.ConstraintLayout(requireContext()), "View was detached")
-
-
-    }*/
 
 }
 

@@ -92,7 +92,9 @@ class MainActivity : AppCompatActivity() {
         return file.exists()
     }
 
-    override fun onDestroy() {
+    override fun
+
+            onDestroy() {
         super.onDestroy()
         drawerLayout = null
         appBarConfiguration = null

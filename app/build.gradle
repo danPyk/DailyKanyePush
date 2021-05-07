@@ -76,10 +76,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
     def work_version = "2.5.0"
 
-
-
-    // Kotlin + coroutines
-
 /*
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'

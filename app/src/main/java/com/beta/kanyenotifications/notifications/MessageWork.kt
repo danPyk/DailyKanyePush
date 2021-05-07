@@ -22,7 +22,6 @@ class MessageWork(context: Context, workerParams: WorkerParameters) :
             val preferences = getPreference()
 
 
-
             if (!preferences) {
                 val notificationManager =
                     ContextCompat.getSystemService(
