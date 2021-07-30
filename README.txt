@@ -3,8 +3,6 @@ Some  Android devices might have some problems receiving push notifications when
 
 
 
-
-
 Xiaomi: Enable autostart for the app. Open up Security and click through to Permissions and Autostart. Make sure app is enabled. 
 
 
