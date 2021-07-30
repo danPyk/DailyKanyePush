@@ -32,3 +32,4 @@ Exclude the app from any of the battery optimization features on your device. Yo
 
 
 Devices using Marshmallow OS or above (Android 6.0+): If you've tried the relevant options above but the problem still persists, you can also try making sure that the Kayako app is not optimized for Doze feature (battery saving). You can find this setting on most devices by clicking  Settings, then Battery, and then Battery Optimization. Make sure Kayako is on the list of apps excluded from optimization.
+
