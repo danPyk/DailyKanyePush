@@ -1,4 +1,5 @@
-Overview:
+Troubleshooting with notifications:
+
 Some  Android devices might have some problems receiving push notifications when the app is closed. Below you'll find solutions for some of the deives:
 
 
@@ -26,7 +27,6 @@ Samsung: If you're using the app on a Samsung device, there are a two steps to t
 Switch off battery optimization for app. Open Settings, then Apps, then the three dots on the upper right corner, then Special Access, then Optimize battery usage. From here, tap on the dropdown menu that says 'Apps not optimized’, then switch it to all apps and then switch off battery optimization for the app.
 
 Exclude the app from any of the battery optimization features on your device. You'll find these in Settings, then Battery. You'll need to disable battery optimization for the  app, as well as checking to make sure the Restrict background data setting is disabled.
-
 
 
 Devices using Marshmallow OS or above (Android 6.0+): If you've tried the relevant options above but the problem still persists, you can also try making sure that the app is not optimized for Doze feature (battery saving). You can find this setting on most devices by clicking  Settings, then Battery, and then Battery Optimization. Make sure app is on the list of apps excluded from optimization.
